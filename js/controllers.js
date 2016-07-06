@@ -26,6 +26,7 @@ String.prototype.replaceAll = function( token, newToken, ignoreCase ) {
     }
 return str;
 };
+
 var app  = angular.module('Lextend.controller', ['ngRoute', 'ngStorage', 'dataServices', 'ui.router', 'ngSanitize', 'bnx.module.facebook', 'directive.g+signin']);
 app
     

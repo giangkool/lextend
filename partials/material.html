@@ -29,6 +29,14 @@
     color: #918F99;
     cursor: pointer;
   }
+  pre{
+    color: #666;
+    background: transparent;
+    border: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    font-weight: 100;
+  }
 </style>
 <div class="container-fluid mimin-wrapper">
 
@@ -51,21 +59,20 @@
       <div class="col-md-12 padding-0">
 
         <div class="panel box-v1" style="margin-top:30px" ng-repeat="material in user_materials">
-          <div class="panel-heading bg-white border-none">
-            <h4 class="text-left" style="padding-top:10px;"><a style="color:#009688" href="#/material-detail/{{material.title}}" ng-click="getdetail(material.materialUri)" onclick="reload()">{{material.title}}</a></h4>
+          <div class="panel-heading bg-white" style="width: 97%; margin: auto; border-bottom: 1px dashed #d7edfc; padding-left:10px; padding-top:3px; padding-bottom:0; margin-bottom:10px">
+            <h4 class="text-left" style="padding-top:0px;"><a style="color:#009688" href="#/material-detail/{{material.title}}" ng-click="getdetail(material.materialUri)" onclick="reload()">{{material.title}}</a></h4>
             <p>By: <a style="color:#2196F3">{{material.author}}</a></p>
           </div>
           <div class="panel-body text-left" style="margin-top:0; padding-top:0">
+            <pre ng-bind-html="material.summary">
+            </pre>
             <p>
-              {{material.summary}}
-            </p>
-            <p>
-              <img src="{{material.picUri}}" class="img-thumbnail" style="margin-top:10px">
+              <img src="{{material.picUri}}" class="img-thumbnail" style="margin-top:5px; margin-left:7px">
             </p>
             <div class="col-md-12 top-10">
                 <button class="btn" ng-click="like(material.materialUri)">
-                                              <i ng-hide="material.userLiked" class="icon-like icons"> {{material.numLikes}}</i>
-                                              <i ng-hide="!material.userLiked" class="icon-like icons" style="color:#009DD8"> {{material.numLikes}}</i>
+                                              <i ng-hide="material.userLiked" class="fa fa-heart"> {{material.numLikes}}</i>
+                                              <i ng-hide="!material.userLiked" class="fa fa-heart" style="color:red"> {{material.numLikes}}</i>
                                                
                                             </button>
                     <a class="btn">

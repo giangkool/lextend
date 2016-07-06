@@ -45,7 +45,7 @@ app
         //Ham lay danh sach cac tu goi y
         apiService.material_user(auth_token, 'eng', 'vie', -1, 5).then(function (response) {
             $scope.user_materials = response.data.data.materials;
-            // console.log($scope.user_materials);
+            console.log($scope.user_materials);
         });
 
         apiService.material_recommend(auth_token, 'eng', 'vie').then(function (response) {
@@ -96,7 +96,7 @@ app
         var uri = localStorage.getItem('m_uri');
         var auth_token = window.localStorage.getItem('auth_token');
         $scope.username = localStorage.getItem('user_name');
-
+        console.log($scope.username);
         //format url
         $scope.url = function(src){
             return $sce.trustAsResourceUrl(src);                               

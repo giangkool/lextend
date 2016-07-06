@@ -1,14 +1,22 @@
+<style>
+    pre{
+    color: #666;
+    background: transparent;
+    border: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+</style>
 <div class="container-fluid mimin-wrapper">
     <div id="content">
         <div class="panel box-shadow-none content-header" style="margin-bottom:0">
             <div class="panel-body" style="padding:0; padding-left:15px">
                 <div class="col-md-12">
-                    <h3 class="animated fadeInLeft" ng-show="m_detail.material.creator == lextend">
+                    <h3 class="animated fadeInLeft" ng-show="m_detail.material.creator == username">
                      <button onclick="window.location.href='#/material'" onclick="reload()" style="border:none; background:transparent"><i class="fa fa-hand-o-left" style="color:#F36E14; font-size:27px; margin-left:-12px; margin-right:7px"></i></button>
                       Materials
                     </h3>
 
-                    <h3 class="animated fadeInLeft" ng-show="m_detail.material.creator != lextend">
+                    <h3 class="animated fadeInLeft" ng-show="m_detail.material.creator != username">
                      <button onclick="window.location.href='#/'" onclick="reload()" style="border:none; background:transparent"><i class="fa fa-hand-o-left" style="color:#F36E14; font-size:27px; margin-left:-12px; margin-right:7px"></i></button>
                       Materials
                     </h3>
@@ -21,17 +29,16 @@
             <div class="panel box-v7">
                 <div class="pull-right article-v1-time">
                     <div class="panel box-v1" style="margin-top:30px">
-                        <div class="panel-heading bg-white border-none">
-                            <h4 class="text-left" style="padding-top:10px;"><a style="color:#009688">{{m_detail.material.title}}</a></h4>
+                        <div class="panel-heading bg-white" style="width: 97%; margin: auto; border-bottom: 1px dashed #d7edfc; padding-left:10px; padding-top:3px; padding-bottom:0">
+                            <h4 class="text-left" style="padding-top:0px;"><a style="color:#009688">{{m_detail.material.title}}</a></h4>
                             <p>By: <a>{{m_detail.material.creator}}</a></p>
-                            <hr style="margin-top:0; margin-bottom:7px" />
                         </div>
                         <div class="panel-body text-left" style="margin-top:0; padding-top:0">
+                            <pre ng-bind-html="m_detail.material.content" style="margin-bottom:5px">
+                                <!--{{}}-->
+                            </pre>
                             <p>
-                                {{m_detail.material.content}}
-                            </p>
-                            <p>
-                                <img ng-src="{{url(m_detail.material.picUri)}}" class="img-responsive" style="margin-top:10px">
+                                <img ng-src="{{url(m_detail.material.picUri)}}" class="img-responsive" style="margin-top:5px; margin-left:7px">
                             </p>
                             <div class="col-md-12 top-20">
                                 <button class="btn" ng-click="like(m_detail.material.materialUri)">
@@ -147,7 +154,7 @@
       function muted(){
           // document.getElementById('iaudio').muted = true;
           var player =   document.getElementById('iaudio');
-          player.src = "";
+          player.volume = 0;
       };
 
     function reload(){

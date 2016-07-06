@@ -1,3 +1,12 @@
+<style>
+  .definitions li{
+    text-indent: 15px;
+  }
+  .definitions strong{
+    color: #EF8A2F;
+    text-transform: uppercase;
+  }
+</style>
 <div class="container-fluid mimin-wrapper" >
     
     <!-- start: Content -->
@@ -19,7 +28,7 @@
               <div class="panel-body">
                  <ul id="tabs-demo6" class="nav nav-tabs nav-tabs-v6 masonry-tabs" role="tablist">
                     <li role="presentation" class="active">
-                      <a href="#tabs-demo7-area1" id="tabs-demo6-1" role="tab" data-toggle="tab" aria-expanded="true">Search results</a>
+                      <a href="#tabs-demo7-area1" id="tabs-demo6-1" role="tab" data-toggle="tab" aria-expanded="true" style="font-size:17px; color:#918C8C">Search results</a>
                     </li>
                   </ul>
               </div>
@@ -31,15 +40,20 @@
                       <div class="col-md-12 padding-0">
                           <div class="media" style="height:auto">
                             <div class="media-body" ng-hide="nonword">
-                              <a class="media-heading" style="font-size:24px; margin-left:26px" ng-click="submitEntry()">{{lookdictionary.word}} <i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a><br/>
-                              <blockquote>
-                                <p ng-bind-html="lookdictionary.definitions"></p>
+                              <audio hidden id="iaudio" ng-repeat="content in lookdictionary.pronid2Pron" ng-src="{{url(content.audioUri)}}" autoplay controls preload="none">
+                                                      Your browser does not support the audio element.
+                              </audio>
+                              <a class="media-heading" style="font-size:24px; margin-left:26px; text-transform: uppercase" onclick="play()">{{lookdictionary.word}} <i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a><br/>
+                              <!--<a class="media-heading" style="font-size:24px; margin-left:26px; text-transform: uppercase" ng-click="submitEntry()">{{lookdictionary.word}} <i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a><br/>-->
+                              <blockquote class="definitions">
+                                <!--<p>{{lookdictionary.definitions}}</p>-->
+                                <p ng-bind-html="lookdictionary.definitions.toString().replaceAll('pos','strong').replaceAll('def','li').replaceAll('0','').replaceAll(',','')"></p>
                               </blockquote><br/>
                               <div class="col-md-12">
                                 <h3>Examples</h3>
                                 <dl ng-repeat="content in lookdictionary.examples">
-                                    <dt><a ng-bind-html="content.sentence"></a></dt>
-                                    <dd ng-bind-html="content.translationText"></dd>
+                                    <dt style="font-size:17px; font-weight:100"><a ng-bind-html="content.sentence"></a></dt>
+                                    <dd style="font-size:16px" ng-bind-html="content.translationText"></dd>
                                 </dl>
                              </div>
                             </div>
@@ -61,6 +75,13 @@
 </div>
 
   <script>
+
+    function play(){
+          // document.getElementById('iaudio').muted = true;
+          var player =   document.getElementById('iaudio');
+          player.play();
+      };
+
     function reload(){
           $("html, body").animate({
             scrollTop: 0
