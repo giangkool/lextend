@@ -1,0 +1,171 @@
+<div class="container-fluid mimin-wrapper">
+    <div id="content">
+        <div class="panel box-shadow-none content-header" style="margin-bottom:0">
+            <div class="panel-body" style="padding:0; padding-left:15px">
+                <div class="col-md-12">
+                    <h3 class="animated fadeInLeft" ng-show="m_detail.material.creator == lextend">
+                     <button onclick="window.location.href='#/material'" onclick="reload()" style="border:none; background:transparent"><i class="fa fa-hand-o-left" style="color:#F36E14; font-size:27px; margin-left:-12px; margin-right:7px"></i></button>
+                      Materials
+                    </h3>
+
+                    <h3 class="animated fadeInLeft" ng-show="m_detail.material.creator != lextend">
+                     <button onclick="window.location.href='#/'" onclick="reload()" style="border:none; background:transparent"><i class="fa fa-hand-o-left" style="color:#F36E14; font-size:27px; margin-left:-12px; margin-right:7px"></i></button>
+                      Materials
+                    </h3>
+                    <!-- ngRepeat: item in settings.settings -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-12">
+            <div class="panel box-v7">
+                <div class="pull-right article-v1-time">
+                    <div class="panel box-v1" style="margin-top:30px">
+                        <div class="panel-heading bg-white border-none">
+                            <h4 class="text-left" style="padding-top:10px;"><a style="color:#009688">{{m_detail.material.title}}</a></h4>
+                            <p>By: <a>{{m_detail.material.creator}}</a></p>
+                            <hr style="margin-top:0; margin-bottom:7px" />
+                        </div>
+                        <div class="panel-body text-left" style="margin-top:0; padding-top:0">
+                            <p>
+                                {{m_detail.material.content}}
+                            </p>
+                            <p>
+                                <img ng-src="{{url(m_detail.material.picUri)}}" class="img-responsive" style="margin-top:10px">
+                            </p>
+                            <div class="col-md-12 top-20">
+                                <button class="btn" ng-click="like(m_detail.material.materialUri)">
+                                              <i ng-hide="m_detail.userLiked" class="fa fa-heart"> {{m_detail.numLikes}}</i>
+                                              <i ng-hide="!m_detail.userLiked" class="fa fa-heart" style="color:red"> {{m_detail.numLikes}}</i>
+                                            </button>
+                                <button class="btn">
+                                              <i class="icon-bubble icons"></i> {{m_detail.numComments}}
+                                            </button>
+                                            <button class="btn" onclick="modals()" ng-click="getmaterial()">
+                                      <a data-toggle="tooltip" class="fa fa-volume-up" data-placement="top" title="" style="border: none; background: transparent;  color: #F36E14; font-size:18px" data-original-title="Listen material" ></a>
+                                        <!--<i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer; font-size:18px"></i>-->
+                            </button>
+                            </div>
+
+                             <div class="modal fade" id="modal1" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                <div class="modal-header" style="background:#00838F; height:50px; text-align:center">
+                                                    <h4 style="color:#fff; margin-top: -1px; display: -webkit-inline-box;">{{modal.material.title}}</h4>
+                                                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
+                                                </div>
+                                                <div class="modal-body">
+                                                    <center style="margin-top:20px">
+                                                      <audio id="iaudio" ng-src="{{url(modal.material.audioUri)}}" autoplay controls preload="none">
+                                                      Your browser does not support the audio element.
+                                                      </audio>
+                                                    </center>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                                    <button id="reload" type="button" class="btn btn-primary" data-dismiss="modal" data-refresh="true" style="background-color:#00838F" onclick="muted()" data-dismiss="modal">Close</button>
+                                                </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                            </div>
+
+                            <div class="col-md-12 padding-0 box-v7-comment">
+
+                              <div class="media" ng-repeat="comment in list_comment">
+                                <div class="media-left">
+                                  <a href="#">
+                                    <img ng-show="username != comment.username" src="asset/img/avatar2.png" class="media-object box-v7-avatar"/>
+                                    <img ng-show="username == comment.username" src="asset/img/avatar.jpg" class="media-object box-v7-avatar"/>
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                  <h4 class="media-heading" style="color:#2196F3">{{comment.username}}</h4>
+                                   <p>
+                                       {{comment.message}}
+                                       <button ng-show="username == comment.username"  data-toggle="modal" data-target="#modal2" style="border: none; background: transparent;  color: #009DD8;" >
+                                           <a ng-click="editcomment($index)" data-toggle="tooltip" class="fa fa-pencil-square-o" data-placement="top" title="" style="border: none; background: transparent;  color: #009DD8;" data-original-title="Edit your comment" ></a>
+                                       </button>
+                                   </p>
+                                    
+                                </div>
+                              </div>
+
+                              <div class="media">
+                                <div class="media-left">
+                                  <a href="#">
+                                    <img src="asset/img/avatar.jpg" class="media-object box-v7-avatar"/>
+                                  </a>
+                                </div>
+                                <div class="media-body">
+                                    <!--onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()"-->
+                                     <textarea id="demon" class="box-v7-commenttextbox" ng-model="message" placeholder="write comments..."></textarea>
+                                     <!--<input type="button" id="btnSearch" value="Search" onclick="clearContents(demon)"  ng-click="add_comment(message, m_detail.materialUri)" hidden/>-->
+                                     
+                                    <div class="col-md-12 col-sm-12 col-xs-12" style="padding-right:0; margin-top:5px;">
+                                    <input type="submit" value="Reply" class="btn btn-danger pull-right" style="width:120px" onclick="clearContents(demon)"  ng-click="add_comment(message, m_detail.materialUri)">
+                                </div>
+                                </div>
+                              </div>
+
+                               <div class="modal fade" id="modal2" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                <div class="modal-header" style="background:#00838F; height:50px; text-align:center">
+                                                    <h4 style="color:#fff; margin-top: -1px; display: -webkit-inline-box;">Edit your comment</h4>
+                                                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
+                                                </div>
+                                                <div class="modal-body">
+                                                    <textarea rows="4" cols="78" placeholder="User definition" style="border:none" ng-model="icomment.message"></textarea>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary" ng-click="save()" style="background-color:#00838F" data-dismiss="modal">Save</button>
+                                                </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                            </div>
+
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+
+     function modals(){
+          $('#modal1').modal({
+          backdrop: 'static',
+          keyboard: false
+      });
+    };
+    
+      function muted(){
+          // document.getElementById('iaudio').muted = true;
+          var player =   document.getElementById('iaudio');
+          player.src = "";
+      };
+
+    function reload(){
+            $("html, body").animate({
+                scrollTop: 0
+            }, 600);   
+        };
+     function clearContents(element) {
+            element.value = '';
+        }
+
+        $("a[data-target=#modal1]").click(function(ev) {
+    ev.preventDefault();
+    var target = $(this).attr("href");
+
+    // load the url and show modal on success
+    $("#modal1 .modal-body").load(target, function() { 
+         $("#modal1").modal("show"); 
+    });
+});
+</script>

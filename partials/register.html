@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Starter Template - Materialize</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="styles/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="styles/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <style type="text/css">
+	html,
+	body {
+		height: 100%;
+	}
+  .navbar{
+    display: none;
+  }
+  #left-menu{
+    display: none;
+  }
+  footer{
+    display: none;
+  }
+  .copyright{
+    display: none;
+  }
+	html {
+		display: table;
+		margin: auto;
+	}
+	body {
+		display: table-cell;
+		vertical-align: middle;
+	}
+	.margin {
+	  margin: 0 !important;
+	}
+</style>
+</head>
+<body>
+	<div id="login-page" class="row">
+    <div class="col s12 z-depth-6 card-panel">
+      <form class="login-form" ng-hide="isLogin">
+        <div class="row">
+          <div class="input-field col s12 center" style="margin-bottom:-10px">
+            <img src="images/login.png" width="170px" style="margin-bottom:-10px" alt="" class="responsive-img valign profile-image-login">
+            <p class="center login-form-text"><a style="color:#008A97; font-size:25px">Lextend</a> - Extend your Lexicon</p>
+            <div id="alert-danger" class="alert alert-success" role="alert" ng-hide="!success">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <a href="#" class="alert-link" style="color:#fff">{{nof}}<br/></a>
+            </div>
+            <div id="alert-danger" class="alert alert-danger" role="alert" ng-hide="!error">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <a href="#" class="alert-link" style="color:#fff">{{nof}}</a>
+            </div>
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+            <i class="small material-icons prefix">person_pin</i>
+            <input id="username" type="text" class="validate" placeholder="Username" ng-model="user.username">
+            <!--<label for="username">Username</label>-->
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+            <i class="small material-icons prefix">recent_actors</i>
+            <input id="email" type="text" class="validate" placeholder="Email" ng-model="user.email">
+            <!--<label for="email">Email</label>-->
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+            <i class="small material-icons prefix">lock_open</i>
+            <input id="password" type="password" class="validate" placeholder="Password" ng-model="user.password_1">
+            <!--<label for="password">Password</label>-->
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+            <i class="small material-icons prefix">lock_outline</i>
+            <input id="password-again" type="password" placeholder="Re-type password" ng-model="user.password_2">
+            <!--<label for="password-again">Re-type password</label>-->
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <a ng-click="Register(user)" class="btn waves-effect waves-light col s12" style="margin-left:0px; margin-right:30px">Sign Up</a>
+          </div>
+          <div class="input-field col s12">
+            <p class="margin center medium-small sign-up">Already have an account? <a href="#/login">Login</a></p>
+          </div>
+        </div>
+      </form>
+      
+        <form  class="login-form" ng-hide="!isLogin" >
+        <div class="row">
+          <div class="input-field col s12 center">
+            <img src="images/login.png" width="180px" height="90" alt="" class="responsive-img valign profile-image-login">
+            <p class="center login-form-text"><a style="color:#008A97; font-size:25px">Lextend</a> - Extend your Lexicon</p>
+            <div id="alert-danger" class="alert alert-success" role="alert" ng-hide="!success2">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <a href="#" class="alert-link" style="color:#fff"> Select language success !<br/> The system automatically redirected to the homepage in seconds</a>
+            </div>
+          </div>
+        </div>
+        <div class="row margin">
+         <h5 style="font-size:17px; text-align:center; color:#00838F">Start choose new language</h5>
+          <center>
+              <img src="images/England.png" style="padding-right:15px">
+              <img src="images/viet nam.png" style="padding-right:15px">
+              <img src="images/Germany.png">
+            </center>                                     
+        </div>
+        <div class="row margin">
+          <select id="l2" class="form-control" style="margin-bottom:20px; margin-top:10px" ng-model="ln" ng-options="item as item.langid + ' - '  + item.vialangid for item in lang">
+            <option style="display:none" value="">select a new language</option>
+            <!--<option ng-repeat="item in lang"> {{item.langid}} via {{item.vialangid}}</option>-->
+          </select>
+          <img ng-hide="lang" src="images/loading.gif" style="height:42px; margin-left:250px; margin-top:-94px"/>
+        </div>
+        <div class="row" style="margin-bottom:-10px">
+          <div class="input-field col s12">
+            <img src="images/separatorcicle.png" style="display:block; margin:auto; margin-top:-15px;"/>    
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <a class="btn waves-effect waves-light col s12" ng-click="new(ln)">Set new language</a>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom:5px">
+
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/scripts/materialize.js"></script>
+  </body>
+</html>

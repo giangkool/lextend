@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html class="no-js"> <!--<![endif]-->
+<head>
+
+    <!-- Meta-Information -->
+    <title>Lextend</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="ACME Inc.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Vendor: Bootstrap Stylesheets http://getbootstrap.com -->
+    <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/font-awesome.min.css" />  
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/simple-line-icons.css" />
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/animate.min.css" />
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/fullcalendar.min.css" />
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/summernote.css"/>
+    <script src="js/audiojs/audio.min.js"></script>
+    <link href="asset/css/style.css" rel="stylesheet">
+    <!-- end: Css -->
+    <link rel="shortcut icon" href="asset/img/logomi.png">
+    <!-- Our Website CSS Styles -->
+    <link rel="stylesheet" href="css/main.css">
+
+</head>
+<body ng-app="Lextend">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- Our Website Content Goes Here -->
+<div ng-include='"templates/header.html"'></div>
+<div ng-include='"templates/leftmenu.html"'></div>
+<div ng-view>
+</div>
+<div ng-include='"templates/footer.html"'></div>
+
+<!-- Vendor: Javascripts -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
+<!-- plugins -->
+    <script src="asset/js/plugins/moment.min.js"></script>
+    <script src="asset/js/plugins/icheck.min.js"></script>
+    <script src="asset/js/plugins/summernote.min.js"></script>
+    <script src="asset/js/plugins/jquery.nicescroll.js"></script>
+    <script src="//cdn.ckeditor.com/4.5.9/standard/ckeditor.js"></script>
+    
+
+<!-- Vendor: Angular, followed by our custom Javascripts -->
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.6/angular-sanitize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.0/angular-ui-router.min.js"></script>
+
+<!-- Our Website Javascripts -->
+<script src="js/main.js"></script>
+<script src="js/controllers.js"></script>
+<script src="js/controllers/auth.js"></script>
+<script src="js/controllers/home.js"></script>
+<script src="js/controllers/dictionary.js"></script>
+<script src="js/controllers/search.js"></script>
+<script src="js/controllers/material.js"></script>
+<script src="js/controllers/word.js"></script>
+<script src="js/services.js"></script>
+<script src="js/facebook.js"></script>
+<script src="js/google-plus-signin.js"></script>
+<!-- ionic/angularjs js -->
+<!--<script src="lib/ionic/js/ionic.bundle.js"></script>
+<script src="lib/angular-sanitize/angular-sanitize.min.js"></script>-->
+
+</body>
+</html>

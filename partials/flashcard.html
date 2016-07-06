@@ -1,0 +1,151 @@
+<style>
+    .item blockquote p:before {
+        display: none;
+    }
+
+    #quote-carousel .carousel-control {
+        background: none;
+        color: #222;
+        font-size: 2.3em;
+        text-shadow: none;
+        margin-top:-10px;
+    }
+
+</style>
+<div class="container-fluid mimin-wrapper">
+      
+    <!-- start: content -->
+    <div id="content">
+         <div class="panel box-shadow-none content-header" style="margin-bottom:0">
+            <div class="panel-body" style="padding:0; padding-left:5px">
+                <div class="col-md-12">
+                    <h3 class="animated fadeInLeft ng-binding">
+                     <button onclick="window.location.href='#/'" style="border:none; background:transparent"><i class="fa fa-hand-o-left" style="color:#F36E14; font-size:27px; margin-left:-12px; margin-right:7px"></i></button>
+                      Flash card
+                    </h3>
+                    <!-- ngRepeat: item in settings.settings -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel top-20">
+                 <div class="panel-body">
+
+                     <div class="carousel slide" data-ride="carousel" id="quote-carousel" style="margin-top:0px;" ng-controller="WordCtrl">
+                          <!-- Bottom Carousel Indicators -->
+                          <ol class="carousel-indicators" style="bottom:-25px">
+                            <li data-target="#quote-carousel" data-slide-to="0" ng-click="hideall()" class="active"></li>
+                            <li data-target="#quote-carousel" data-slide-to="1" ng-click="hideall()" ng-repeat="word in today_words"></li>
+                          </ol>
+
+                          <!-- Carousel Slides / Quotes -->
+                          <div class="carousel-inner">
+
+                            <!-- Quote 1 -->
+                            <div class="item active">
+                              <blockquote>
+                                <div class="col-md-12">
+                                  <div class="col-sm-3 text-center">
+                                   <a>
+                                        <h3>
+                                            <a ng-click="submitEntry(first_today_word.word)">{{first_today_word.word}} <i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a>
+                                        </h3>
+                                   </a>
+                                    <hr style="width:80%; margin-top:10px; margin-bottom:10px"/>
+                                    <div class="col-md-12">
+                                        <div class="col-md-6">
+                                             <a id="hint" ng-hide="!hint" ng-click="hide1()" style="cursor:pointer">
+                                                <i class="fa fa-lightbulb-o fa-lg" aria-hidden="true" style="color:#00838F;"></i>
+                                                <h5 style="margin-top:0; color:#00838F">Hint</h5>
+                                            </a>
+                                             <a ng-hide="!difinition" ng-click="hide2()" style="cursor:pointer">
+                                                <i class="fa fa-book" aria-hidden="true" style="color:#00838F; margin-left:5px; margin-top:-50px"></i>
+                                                <h5 style="margin-top:0; color:#00838F">Definition</h5>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-6">
+                                                    <div class="form-animate-radio">
+                                                        <label class="radio" style="margin-bottom:0; padding-bottom:0; margin-left:16px; ">
+                                                            <input id="radio1" type="radio" name="radios">
+                                                            <span class="outer">
+                                                            <span class="inner" style="color:#F36E14"></span></span><h5 style="color:#F36E14; padding-top:13px; margin-left:-5px">Easy</h5>
+                                                        </label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                        
+                                  <div class="col-sm-9">
+                                    <p id="phint" ng-hide="!phint" ng-repeat="content in first_today_word.examples" style="padding-left:25px; border-left:1px solid #eee; font-weight:100">
+                                       {{content}}
+                                    </p>
+                                    <p id="pdefinition" ng-bind-html="content" ng-hide="!pdifinition" ng-repeat="content in first_today_word.definitions" style="padding-left:25px; border-left:1px solid #eee; font-weight:100">
+                                        <!--{{content}}-->
+                                    </p>
+                                  </div>
+                                </div>
+                              </blockquote>
+                            </div>
+                            
+                            <!-- Quote 2 -->
+                            <div class="item" ng-repeat="word in today_words">
+                              <blockquote>
+                                <div class="col-md-12">
+                                  <div class="col-sm-3 text-center">
+                                        <h3>
+                                           <a ng-click="submitEntry(word.word)"> {{word.word}} <i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a>
+                                        </h3>
+                                    <hr style="width:80%; margin-top:10px; margin-bottom:10px"/>
+                                    <div class="col-md-12">
+                                        <div class="col-md-6">
+                                             <a id="hint2" ng-hide="!hint" ng-click="hide1()" style="cursor:pointer">
+                                                <i class="fa fa-lightbulb-o fa-lg" aria-hidden="true" style="color:#00838F;"></i>
+                                                <h5 style="margin-top:0; color:#00838F">Hint</h5>
+                                            </a>
+                                             <a id="definition2" ng-hide="!difinition" ng-click="hide2()" style="cursor:pointer">
+                                                <i class="fa fa-book" aria-hidden="true" style="color:#00838F; margin-left:5px; margin-top:-50px"></i>
+                                                <h5 style="margin-top:0; color:#00838F">Definition</h5>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-6">
+                                                    <div class="form-animate-radio">
+                                                        <label class="radio" style="margin-bottom:0; padding-bottom:0; margin-left:16px; ">
+                                                            <input id="radio1" type="radio" name="radios">
+                                                            <span class="outer">
+                                                            <span class="inner" style="color:#F36E14"></span></span><h5 style="color:#F36E14; padding-top:13px; margin-left:-5px">Easy</h5>
+                                                        </label>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                  </div>
+                                  <div class="col-sm-9">
+                                    <p id="phint2" ng-hide="!phint" ng-repeat="content in word.examples" style="padding-left:25px; border-left:1px solid #eee; font-weight:100">
+                                        - <span style="color:#2196F3">{{content.sentence}}</span><br/>
+                                        {{content.translationText}}
+                                    </p>
+                                    <p id="pdefinition2" ng-bind-html="content" ng-hide="!pdifinition" ng-repeat="content in word.definitions" style="padding-left:25px; border-left:1px solid #eee; font-weight:100">
+                                            <!--{{content}}-->
+                                    </p>
+                                  </div>
+                                </div>
+                              </blockquote>
+                            </div>
+                          </div>
+
+                          <!-- Carousel Buttons Next/Prev -->
+                          <a data-slide="prev" data-target="#quote-carousel" class="left carousel-control" ng-click="hideall()" style="left:-20px; width:10%; cursor:pointer"><i class="fa fa-hand-o-left" style="color:#00838F; font-size:27px"></i></a>
+                          <a data-slide="next" data-target="#quote-carousel" class="right carousel-control" ng-click="hideall()" style="right:-20px !important; width:10%; cursor:pointer"><i class="fa fa-hand-o-right" style="color:#F36E14; font-size:27px"></i></a>
+                        </div>
+                </div>
+            </div>
+        </div> 
+        
+    </div>
+</div>
+<script>
+    // interval is in milliseconds. 1000 = 1 second - so 1000 * 10 = 10 seconds
+    $('.carousel').carousel({
+    interval: false
+    });
+</script>

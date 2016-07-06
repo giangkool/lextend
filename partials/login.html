@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+  <title>Login - Lextend</title>
+
+  <!-- CSS  -->
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-aNUYGqSUL9wG/vP7+cWZ5QOM4gsQou3sBfWRr/8S3R1Lv0rysEmnwsRKMbhiQX/O"
+    crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="styles/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="styles/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <style type="text/css">
+    html,
+    body {
+      height: 100%;
+    }
+    
+    .navbar {
+      display: none;
+    }
+    
+    #left-menu {
+      display: none;
+    }
+    
+    footer {
+      display: none;
+    }
+    
+    .copyright {
+      display: none;
+    }
+    
+    html {
+      display: table;
+      margin: auto;
+    }
+    
+    body {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    
+    .margin {
+      margin: 0 !important;
+    }
+    /* Text inputs */
+    
+    input:not([type]),
+    input[type=text],
+    input[type=password],
+    input[type=email],
+    input[type=url],
+    input[type=time],
+    input[type=date],
+    input[type=datetime],
+    input[type=datetime-local],
+    input[type=tel],
+    input[type=number],
+    input[type=search],
+    textarea.materialize-textarea {
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid #9e9e9e;
+      border-radius: 0;
+      outline: none;
+      height: 3rem;
+      width: 100%;
+      font-size: 1rem;
+      margin: 0 0 15px 0;
+      padding: 0;
+      box-shadow: none;
+      box-sizing: inherit;
+      transition: all 0.3s;
+    }
+    
+    .profile {
+      border: 3px solid #B7B7B7;
+      padding: 10px;
+      margin-top: 10px;
+      width: 350px;
+      background-color: #F7F7F7;
+      height: 160px;
+    }
+    
+    .profile p {
+      margin: 0px 0px 10px 0px;
+    }
+    
+    .head {
+      margin-bottom: 10px;
+    }
+    
+    .head a {
+      float: right;
+    }
+    
+    .profile img {
+      width: 100px;
+      float: left;
+      margin: 0px 10px 10px 0px;
+    }
+    
+    .proDetails {
+      float: left;
+    }
+    
+    .facebook {
+      background: #4c69ba;
+      background: linear-gradient(#4c69ba, #3b55a0);
+      border-color: #4c69ba;
+      border-radius: 2px;
+      color: #fff;
+      font-family: "Helvetica neue";
+      -webkit-font-smoothing: antialiased;
+      text-shadow: 0 -1px 0 #354c8c;
+      width: 99%;
+      margin-left: 1px;
+    }
+    
+    .facebook:hover {
+      background: linear-gradient(#5b7bd5, #4864b1);
+      border-bottom-color: #365899;
+      border-left-color: #4961a8;
+      border-right-color: #4961a8;
+      border-top-color: #5874c3;
+      box-shadow: inset 0 1px 0 #607fd6;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="login-page" class="row" style="width:410px">
+    <div class="col s12 card-panel">
+      <form class="login-form" ng-hide="isLogin">
+        <div class="row">
+          <div class="input-field col s12 center">
+            <img src="images/login.png" width="180px" height="90" alt="" class="responsive-img valign profile-image-login">
+            <p class="center login-form-text"><a style="color:#008A97; font-size:25px">Lextend</a> - Extend your Lexicon</p>
+            <div id="alert-danger" class="alert alert-danger" role="alert" ng-hide="!error">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <a href="#" class="alert-link" style="color:#fff">UserName or Password you enter invalid !</a>
+            </div>
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+            <i class="small material-icons prefix">perm_identity</i>
+            <input id="email" type="text" placeholder="Username or Email" ng-model="user.username">
+            <!--<label for="email">Username or Email</label>-->
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+            <i class="small material-icons prefix">lock</i>
+            <input id="password" type="password" placeholder="Password" ng-model="user.password" onkeydown="if (event.keyCode == 13) document.getElementById('loogin').click()">
+            <!--<label for="password">Password</label>-->
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m12 l12  login-text">
+            <input type="checkbox" id="remember-me" />
+            <label for="remember-me">Remember me</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <a id="loogin" class="btn waves-effect waves-light col s12" ng-click="signIn(user)">Login</a>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom:-10px">
+          <div class="input-field col s12">
+            <img src="images/separatorcicle.png" style="display:block; margin:auto; margin-top:-15px;" />
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom:5px">
+          <div class="input-field col s12 s6 m6 l6">
+            <!--<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+             </fb:login-button>-->
+            <div class="facebook">
+              <facebook-login auto_logout="true" scope="public_profile" data-auto-logout-link="true"></facebook-login>
+              <facebook app-id="1722190194696510"></facebook>
+              <!--<facebook app-id="1732817620341014"></facebook>-->
+            </div>
+            <!--<a class="waves-effect waves-light btn" style="background:#4862A3; margin-left:7px" ng-click="facelogin()"><i class="fa fa-facebook-official" aria-hidden="true" style="padding-right:6px"></i>Facebook</a>-->
+          </div>
+          <div class="input-field col s12 s6 m6 l6">
+            <!--<div id="gSignIn">login google</div>-->
+            <!--<a class="waves-effect waves-light btn" style="background:#CC4326" onclick="login()"><i class="fa fa-google" aria-hidden="true" style="padding-right:15px; padding-left:10px"></i>Google</a>-->
+
+            <google-plus-signin clientid="660978697998-21u1hhp5joo5r8hi8b6rce6njm829n6i.apps.googleusercontent.com" autorender="true"
+              customtargetid="my-custom-element">
+              <div id="my-custom-element"><button>Sign In With Google</button></div>
+            </google-plus-signin>
+          </div>
+        </div>
+        <div id="status" ng-model="fuser">
+        </div>
+        <div class="row">
+          <div class="input-field col s6 m6 l6">
+            <p class="margin medium-small"><a href="#/register">Sign Up</a></p>
+          </div>
+          <div class="input-field col s6 m6 l6">
+            <p class="margin right-align medium-small"><a href="#/forgot-password">Forgot password?</a></p>
+          </div>
+        </div>
+
+      </form>
+
+      <form class="login-form" ng-hide="!isLogin">
+        <div class="row">
+          <div class="input-field col s12 center">
+            <img src="images/login.png" width="180px" height="90" alt="" class="responsive-img valign profile-image-login">
+            <p class="center login-form-text"><a style="color:#008A97; font-size:25px">Lextend</a> - Extend your Lexicon</p>
+            <div id="alert-danger" class="alert alert-success" role="alert" ng-hide="!success">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <a href="#" class="alert-link" style="color:#fff"> Set new language success<br/> System auto redirected to Homepage in 5 seconds</a>
+            </div>
+          </div>
+        </div>
+        <div class="row margin">
+          <h5 style="font-size:17px; text-align:center; color:#00838F">Start choose new language</h5>
+          <center>
+            <img src="images/England.png" style="padding-right:15px">
+            <img src="images/viet nam.png" style="padding-right:15px">
+            <img src="images/Germany.png">
+          </center>
+        </div>
+        <div class="row margin">
+          <select id="l2" class="form-control" style="margin-bottom:20px; margin-top:10px" ng-model="ln" ng-options="item as item.langid + ' - '  + item.vialangid for item in lang">
+            <option style="display:none" value="">select a new language</option>
+            <!--<option ng-repeat="item in lang"> {{item.langid}} via {{item.vialangid}}</option>-->
+          </select>
+          <img ng-hide="lang" src="images/loading.gif" style="height:42px; margin-left:335px; margin-top:-94px" />
+        </div>
+        <div class="row" style="margin-bottom:-10px">
+          <div class="input-field col s12">
+            <img src="images/separatorcicle.png" style="display:block; margin:auto; margin-top:-15px;" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <a class="btn waves-effect waves-light col s12" ng-click="new(ln)">Set new language</a>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom:5px">
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/scripts/materialize.js"></script>
+</body>
+</html>

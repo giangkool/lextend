@@ -1,0 +1,71 @@
+<div class="container-fluid mimin-wrapper" >
+    
+    <!-- start: Content -->
+    
+          <div id="content" class="search-v1">
+                <div class="panel box-shadow-none content-header" style="margin-bottom:0">
+            <div class="panel-body" style="padding:0; padding-left:10px">
+                <div class="col-md-12">
+                    <h3 class="animated fadeInLeft ng-binding">
+                     <button onclick="window.location.href='#/'" style="border:none; background:transparent"><i class="fa fa-hand-o-left" style="color:#F36E14; font-size:27px; margin-left:-12px; margin-right:7px"></i></button>
+                      Dictionary Search
+                    </h3>
+                    <!-- ngRepeat: item in settings.settings -->
+                </div>
+            </div>
+        </div>
+
+            <div class="panel">
+              <div class="panel-body">
+                 <ul id="tabs-demo6" class="nav nav-tabs nav-tabs-v6 masonry-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                      <a href="#tabs-demo7-area1" id="tabs-demo6-1" role="tab" data-toggle="tab" aria-expanded="true">Search results</a>
+                    </li>
+                  </ul>
+              </div>
+            </div>
+            <div class="col-md-12">
+               <div class="col-md-12 tabs-area box-shadow-none">
+                  <div id="tabsDemo6Content" class="tab-content tab-content-v6 col-md-12" style="padding-top:0 !important">
+                    <div role="tabpanel" class="tab-pane search-v1-menu1 fade active in" id="tabs-demo7-area1" aria-labelledby="tabs-demo7-area1">
+                      <div class="col-md-12 padding-0">
+                          <div class="media" style="height:auto">
+                            <div class="media-body" ng-hide="nonword">
+                              <a class="media-heading" style="font-size:24px; margin-left:26px" ng-click="submitEntry()">{{lookdictionary.word}} <i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a><br/>
+                              <blockquote>
+                                <p ng-bind-html="lookdictionary.definitions"></p>
+                              </blockquote><br/>
+                              <div class="col-md-12">
+                                <h3>Examples</h3>
+                                <dl ng-repeat="content in lookdictionary.examples">
+                                    <dt><a ng-bind-html="content.sentence"></a></dt>
+                                    <dd ng-bind-html="content.translationText"></dd>
+                                </dl>
+                             </div>
+                            </div>
+                            <div class="media-body" ng-hide="!nonword">
+                              <a style="font-size:24px; margin-left:26px"> {{key}} </a>
+                              <blockquote>
+                                <p> not fount in dictionary !</p>
+                              </blockquote><br/>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+            </div>
+          </div>
+          <!-- end: content -->
+</div>
+
+  <script>
+    function reload(){
+          $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+          // $(document.body).scrollTop(0);
+          // window.location.reload(true);
+        };
+  </script>

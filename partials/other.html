@@ -1,0 +1,231 @@
+<style>
+    /*chart*/
+   .morris-hover{position:absolute;z-index:1000}.morris-hover.morris-default-style{border-radius:10px;padding:6px;color:#666;background:rgba(255,255,255,0.8);border:solid 2px rgba(230,230,230,0.8);font-family:sans-serif;font-size:12px;text-align:center}.morris-hover.morris-default-style .morris-hover-row-label{font-weight:bold;margin:0.25em 0}
+   .morris-hover.morris-default-style .morris-hover-point{white-space:nowrap;margin:0.1em 0}
+</style>
+<div class="container-fluid mimin-wrapper">
+    <!-- start: Content -->
+    <div id="content">
+        <div class="panel box-shadow-none content-header" ng-controller="HomeCtrl">
+            <div class="panel-body" style="padding:0; padding-left:15px">
+                <div class="col-md-12">
+                    <h3 class="animated fadeInLeft">{{result.profile.username}}</h3>
+                    <p class="animated fadeInDown" ng-repeat="item in lang3">
+                        {{item.langid}} via {{item.vialangid}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-12 padding-0">
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <div class="panel">
+                        <div class="panel-heading bg-white border-none">
+                            <h4 class="animated fadeInDown">Swich language</h4>
+                        </div>
+                        <div class="panel-body">
+                            <center>
+                                  <a data-toggle="modal" ng-click="getsupport()" data-target="#modal1" style="cursor: pointer;"> 
+                                      <i class="fa fa-language" aria-hidden="true" style="font-size:180px; color:#00838F; margin-bottom:10px"></i>
+                                  </a>    
+                            </center>
+                        </div>
+                        
+                          <div class="modal fade" id="modal1" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="background:#00838F; height:50px; text-align:center">
+                                            <h4 style="color:#fff; margin-top: -1px; display: -webkit-inline-box;">Setup Language</h4>
+                                            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4>Learning language</h4>
+                                            <select id="l1" class="form-control" ng-model="ln1" ng-options="item as item.langid + ' - '  + item.vialangid for item in lang2" ng-change="demo(ln1)" style="">
+                                               <option style="display:none" value="">select a language</option>
+                                               <!--<option ng-repeat="item in lan"> {{item.langid}} via {{item.vialangid}} </option>-->
+                                            </select>
+                                            <!--<input id="l1" type="text" class="form-control" disabled="" placeholder="{{item.langid}} via {{item.viaLangids}}" ng-repeat="item in settings.settings">-->
+                                            <select id="l2" class="form-control" ng-model="ln" ng-options="item as item.langid + ' - '  + item.vialangid for item in lang" style="margin-top:-30px">
+                                               <option style="display:none" value="">select a new language</option>
+                                               <!--<option ng-repeat="item in lan"> {{item.langid}} via {{item.vialangid}} </option>-->
+                                            </select>
+                                            <hr style="margin-bottom:15px" />
+                                            <h4>Level</h4>
+                                            <!--<select id="le1" class="form-control" style="" ng-options="item.startLevel for item in lang">
+                                            </select>-->
+                                            <input id="le1" type="text" class="form-control" disabled="" placeholder="{{level}}">
+                                            <select id="le2" class="form-control" style="margin-top:-30px">
+                                                <option>0</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                            <button id="hide" type="button" class="btn btn-primary" onclick="hideinput()" style="background-color:#00838F; margin-right:-80px">Select a new language</button>
+                                            <button id="show" type="button" class="btn btn-primary" onclick="showinput()" data-dismiss="modal" style="background-color:#00838F" ng-click="new(ln)">Save</button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                                <script>
+                                    document.getElementById("l2").style.visibility = "hidden";
+                                    document.getElementById("le2").style.visibility = "hidden";
+                                    document.getElementById("show").style.visibility = "hidden";
+                                function hideinput() {
+                                    document.getElementById("l1").style.visibility = "hidden";
+                                    document.getElementById("l2").style.visibility = "visible";
+                                    document.getElementById("le1").style.visibility = "hidden";
+                                    document.getElementById("le2").style.visibility = "visible";
+                                    document.getElementById("show").style.visibility = "visible";
+                                    document.getElementById("hide").style.visibility = "hidden";
+                                } 
+                                function showinput(){
+                                    document.getElementById("l2").style.visibility = "hidden";
+                                    document.getElementById("le2").style.visibility = "hidden";
+                                    document.getElementById("show").style.visibility = "hidden";
+
+                                    document.getElementById("l1").style.visibility = "visible";
+                                    document.getElementById("le1").style.visibility = "visible";
+                                    document.getElementById("hide").style.visibility = "visible";
+                                }
+                                </script>   
+                            </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <div class="panel">
+                        <div class="panel-heading bg-white border-none">
+                            <h4 class="animated fadeInDown">Setting</h4>
+                        </div>
+                        <div class="panel-body">
+                            <center>
+                               <a data-toggle="modal" data-target="#modal2" style="cursor: pointer;"> <i class="fa fa-cogs" aria-hidden="true" style="font-size:180px; color:#00838F; margin-bottom:10px"></i> </a>
+                            </center>
+                        </div>
+                        
+                        <div class="modal fade" id="modal2" role="dialog" ng-repeat="item in settings">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="background:#00838F; height:50px; text-align:center">
+                                            <h4 style="color:#fff; margin-top: -1px; display: -webkit-inline-box;">Setting</h4>
+                                            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4 style="color:#00838F">Dictionary</h4>
+                                             <p>
+                                                <a style="padding-right:10px; font-size:14px; color:#A8A4A4; font-weight:500"> Number of new words per day </a>
+                                                <span style="float:right">{{item.numNewWordPerDay}}</span>
+                                            </p>
+                                             <p>
+                                                <a style="padding-right:10px; font-size:14px; color:#A8A4A4; font-weight:500"> Number of words to review </a>
+                                                <span style="float:right">{{item.numWordPerDay}}</span>
+                                            </p>
+                                            <hr style="margin-bottom:15px" />
+                                            <h4 style="color:#00838F">Today words</h4>
+                                             <p>
+                                                <a style="padding-right:10px; font-size:14px; color:#A8A4A4; font-weight:500"> Download dictionary English via Vietnamese </a>
+                                                <input type="button" class="btn btn-warning" value="Download" style="float:right">
+                                            </p>
+                                             <p class="top-20">
+                                                <a style="padding-right:10px; font-size:14px; color:#A8A4A4; font-weight:500"> Download dictionary Vietnamese via English </a>
+                                                <input type="button" class="btn btn-warning" value="Download" style="float:right">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog --> 
+                            </div>
+                            
+                    </div>
+                </div>
+                   <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="panel">
+                        <div class="panel-heading bg-white border-none">
+                            <h4 class="animated fadeInDown">Staticstics</h4>
+                        </div>
+                        <div class="panel-body" style="padding-top:0">
+                            <center>
+                                <div id="area-example" style="height: 205px;"></div>
+                                                </div>
+                            </center>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: content -->
+</div>
+
+ <script type="text/javascript">
+        
+        //Morris charts snippet - js
+
+$.getScript('http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',function(){
+$.getScript('http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.0/morris.min.js',function(){
+
+  Morris.Area({
+    element: 'area-example',
+    data: [
+      { y: '1.1.', a: 100, b: 90 },
+      { y: '2.1.', a: 75,  b: 65 },
+      { y: '3.1.', a: 50,  b: 40 },
+      { y: '4.1.', a: 75,  b: 65 },
+      { y: '5.1.', a: 50,  b: 40 },
+      { y: '6.1.', a: 75,  b: 65 },
+      { y: '7.1.', a: 100, b: 90 }
+    ],
+    xkey: 'y',
+    ykeys: ['a', 'b'],
+    labels: ['Series A', 'Series B']
+  });
+  
+  Morris.Line({
+        element: 'line-example',
+        data: [
+          {year: '2010', value: 20},
+          {year: '2011', value: 10},
+          {year: '2012', value: 5},
+          {year: '2013', value: 2},
+          {year: '2014', value: 20}
+        ],
+        xkey: 'year',
+        ykeys: ['value'],
+        labels: ['Value']
+      });
+      
+      Morris.Donut({
+        element: 'donut-example',
+        data: [
+         {label: "Android", value: 12},
+         {label: "iPhone", value: 30},
+         {label: "Other", value: 20}
+        ]
+      });
+      
+      Morris.Bar({
+         element: 'bar-example',
+         data: [
+            {y: 'Jan 2014', a: 100},
+            {y: 'Feb 2014', a: 75},
+            {y: 'Mar 2014', a: 50},
+            {y: 'Apr 2014', a: 75},
+            {y: 'May 2014', a: 50},
+            {y: 'Jun 2014', a: 75}
+         ],
+         xkey: 'y',
+         ykeys: ['a'],
+         labels: ['Visitors', 'Conversions']
+      });
+  
+});
+});
+        
+    </script>
+    <!-- end: Javascript -->

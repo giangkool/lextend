@@ -1,0 +1,608 @@
+<style>
+  .box-v4 .panel-body .box-v4-alert {
+    border-bottom: none;
+    padding-bottom: 2px;
+  }
+  
+  .box-v3 {
+    padding-top: 0px;
+    padding-bottom: 50px;
+  }
+  
+  .nav-tabs.nav-tabs-v3 {
+    border-bottom: 2px solid #DDD;
+    padding-top: 0px;
+    margin-bottom: 10px;
+  }
+  
+  .nav-tabs>li.active>a,
+  .nav-tabs>li.active>a:focus,
+  .nav-tabs>li.active>a:hover {
+    color: #00838F;
+    cursor: default;
+    border: none;
+    border-bottom: 1px solid #00838F;
+  }
+  
+  a,
+  a:hover {
+    color: #918F99;
+    cursor: pointer;
+  }
+  /*chart*/
+  
+  .morris-hover {
+    position: absolute;
+    z-index: 1000
+  }
+  
+  .morris-hover.morris-default-style {
+    border-radius: 10px;
+    padding: 6px;
+    color: #666;
+    background: rgba(255, 255, 255, 0.8);
+    border: solid 2px rgba(230, 230, 230, 0.8);
+    font-family: sans-serif;
+    font-size: 12px;
+    text-align: center
+  }
+  
+  .morris-hover.morris-default-style .morris-hover-row-label {
+    font-weight: bold;
+    margin: 0.25em 0
+  }
+  
+  .morris-hover.morris-default-style .morris-hover-point {
+    white-space: nowrap;
+    margin: 0.1em 0
+  }
+  pre{
+    color: #666;
+    background: transparent;
+    border: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+</style>
+
+
+<div class="container-fluid mimin-wrapper">
+
+  <!-- start: content -->
+  <div id="content">
+    <div class="col-md-12" style="padding:20px; margin-bottom:0px">
+      <div class="col-md-12 padding-0" style="padding:15px;">
+        <div class="col-md-12 padding-0">
+          <div class="col-md-7 padding-0">
+            <div class="col-md-12" style="padding-left:0; padding-right:0; margin-left:-10px" ng-controller="MaterialCtrl">
+
+              <div class="panel box-v1" style="margin-top:-10px;" ng-repeat="material in recommended_materials">
+                <div class="panel-heading bg-white" style="width: 97%; margin: auto; border-bottom: 1px dashed #d7edfc; padding-left:10px; padding-top:3px; padding-bottom:0">
+                  <h4 class="text-left" style="padding-top:0px;"><a style="color:#009688" href="#/material-detail/{{material.title}}" ng-click="getdetail(material.materialUri)" onclick="reload()">{{material.title}}</a>
+                  </h4>
+                  <p>By: <a style="color:#2196F3">{{material.author}}</a></p>
+                </div>
+                <div class="panel-body text-left" style="margin-top:0; padding-top:0">
+                  <!--<div>
+                    {{material.summary}}
+                  </div>-->
+
+                   <pre ng-bind-template="{{material.summary}}" style="margin-bottom:0"></pre>
+
+                  <p>
+                    <img ng-src="{{url(meterial.picUri)}}" class="img-thumbnail" style="margin-top:5px; margin-left:7px">
+                  </p>
+                  <div class="col-md-12 top-10">
+                    <button class="btn" ng-click="like(material.materialUri)">
+                                              <i ng-hide="material.userLiked" class="fa fa-heart"> {{material.numLikes}}</i>
+                                              <i ng-hide="!material.userLiked" class="fa fa-heart" style="color:red"> {{material.numLikes}}</i>
+                                               
+                                            </button>
+                    <a class="btn">
+                                              <i class="icon-bubble icons"></i> {{material.numComments}}
+                                            </a>
+                    <button id="getmodal" class="btn" data-refresh="true" onclick="modals()" ng-click="getmaterial(material.title)">
+                                      <a data-toggle="tooltip" class="fa fa-volume-up" data-placement="top" title="" style="border: none; background: transparent;  color: #F36E14; font-size:18px" data-original-title="Listen material" ></a>
+                                        <!--<i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer; font-size:18px"></i>-->
+                            </button>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="modal fade" id="modal1" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                <div class="modal-header" style="background:#00838F; height:50px; text-align:center">
+                                                    <h4 style="color:#fff; margin-top: -1px; display: -webkit-inline-box;">{{modal.title}}</h4>
+                                                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
+                                                </div>
+                                                <div class="modal-body">
+                                                    <center style="margin-top:20px">
+                                                      <!--<iframe id="iaudio" ng-src="{{url(modal.audioUri)}}" allowtransparency="true" height="100" frameborder="0"	 width="550" sandbox></iframe>-->
+                                                      <!--<audio id="iaudio" preload="none" ng-src="{{url(modal.audioUri)}}"/>-->
+
+                                                      <audio id="iaudio" ng-src="{{url(modal.audioUri)}}" autoplay controls preload="none">
+                                                      Your browser does not support the audio element.
+                                                      </audio>
+                                                    </center>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                                    <button id="reload" type="button" class="btn btn-primary" data-backdrop="static" data-keyboard="false"  data-dismiss="modal" data-refresh="true" style="background-color:#00838F" onclick="muted()" data-dismiss="modal">Close</button>
+                                                </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                            </div>
+
+            </div>
+          </div>
+
+          
+
+          <div class="col-md-5" style="padding-right:0;">
+
+            <div class="search" style="background:#009688; margin-top:-10px; margin-bottom:30px" ng-controller="DictionaryCtrl">
+              <div class="input-group searchbox-v1">
+                <span class="input-group-addon  border-none box-shadow-none" id="basic-addon1" style="background:#fff">
+                          <span class="fa fa-search" style="color:#EF8A2F"></span>
+                </span>
+                <input list="bank" ng-model="word" type="text" class="txtsearch border-none box-shadow-none" placeholder="Dictionary Search"
+                  aria-describedby="basic-addon1" style="border-radius:10px" ng-keydown="lookup(word)" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()"
+                />
+                <img ng-if="loadding" src="images/loading.gif" style="height:40px; margin-left:-42px; margin-top:-5px" />
+                <input type="button" id="btnSearch" value="Search" onclick="reload()" ng-click="search_click()" hidden/>
+                <datalist id="bank" style="width:120%">
+                  <option ng-repeat="item in suggestions" value="{{item}}"></option>
+                </datalist>
+              </div>
+            </div>
+
+            <div class="col-md-12 padding-0" ng-controller="WordCtrl">
+              <div class="panel bg-teal" style="margin-bottom:0; margin-top:-10px">
+                <div class="panel-body text-white">
+                  <div class="col-md-12 padding-0">
+                    <div class="text-left col-md-7 col-xs-12 col-sm-7 padding-0">
+                      <h4 style="margin-top:2px; margin-bottom:2px">Today word</h4>
+                    </div>
+                    <div style="padding-top:0px;" class="text-right col-md-5 col-xs-12 col-sm-5 padding-0">
+                      <span class="fa fa-signal fa-2x" style="marin-top:-7px"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel box-v4">
+                <div class="panel-body padding-0" style="margin-top:-10px; padding-top:0">
+                  <div class="col-md-12 col-xs-12 col-md-12 padding-0 box-v4-alert" style="padding-top:0; padding-left:17px; padding-right:15px">
+                    <!--<div style=" overflow: auto; height: 435px;">-->
+                     <div ng-hide="hidefirst">
+                        <h2 style="color:red; margin-top:10px">{{first_today_word.word}}
+                        <a class="media-heading" style="font-size:24px; margin-left:0px" ng-click="submitEntry(first_today_word.word)"><i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a><br/>
+                        </h2>  
+                        <dl ng-repeat="content in first_today_word.examples">
+                                        <h4>{{content.sentence}}
+                                        <a class="media-heading" style="font-size:16px; margin-left:-2px" ng-click="submitEntry(content.sentence)"><i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a><br/>
+                                        </h4>
+                                        <h5>{{content.translationText}}</h5>
+                                    </dl>
+                        
+                        <div ng-repeat="content in first_today_word.definitions">
+                         <p ng-bind-html="content.replace('pos','strong').replace('def','li')"></p>
+                        </div>
+                        <hr style="padding-top:0; margin-top:10px; border-top: 1px dashed #d7edfc; margin-bottom:9px" />
+                        <p style="margin-bottom:5px">Other today words:</p>
+                        <a ng-hide="hidefirst" ng-repeat="word in today_wordsub" style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500" ng-click="show(word.word)">{{word.word}}</a><br/>
+                        <a href="#/flash-card" onclick="reload()"> <span style="font-size:17px; color: #EF8A2F;"> {{number_today_words}} new words and 0 words to review</span>                      <i class="fa fa-hand-o-right fa-2x" style="color:#F36333" aria-hidden="true"></i> </a>
+                    </div>
+
+                    <div ng-hide="!hidefirst">
+                      <h2 style="color:red">{{w_detail.word}}
+                        <a class="media-heading" style="font-size:24px; margin-left:0px" ng-click="submitEntry(w_detail.word)"><i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a><br/>
+                        </h2>
+                        <p ng-bind-html="w_detail.definitions"></p>
+                        <h3>Examples</h3>
+                        <dl ng-repeat="content in w_detail.examples">
+                                        <a ng-bind-html="content.sentence" style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500">
+                                        <a class="media-heading" style="font-size:17px; margin-left:-2px" ng-click="submitEntry(content.sentence)"><i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a>
+                                        </a>
+                                        <dt>{{content.translationText}}</dt>
+                                    </dl>
+                                    <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px" />
+                    <p style="margin-bottom:5px">Other today words:</p>
+                    <a ng-repeat="word in today_words" style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500" ng-click="show(word.word)">{{word.word}}</a><br/>
+                    <a href="#/flash-card" onclick="reload()"> <span style="font-size:17px; color: #EF8A2F;"> {{number_today_words}} new words and 0 words to review</span>                      <i class="fa fa-hand-o-right fa-2x" style="color:#F36333" aria-hidden="true"></i> </a>
+                    </div>
+                    <!--</div>-->
+                    <!--<hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px" />
+                    <p style="margin-bottom:5px">Other today words:</p>
+                    <a ng-hide="hidefirst" ng-repeat="word in today_wordsub" style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500" ng-click="show(word.word)">{{word.word}}</a><br/>
+                    <a ng-hide="!hidefirst" ng-repeat="word in today_words" style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500" ng-click="show(word.word)">{{word.word}}</a><br/>
+                    <a href="#/flash-card" onclick="reload()"> <span style="font-size:17px; color: #EF8A2F;"> {{number_today_words}} new words and 0 words to review</span>                      <i class="fa fa-hand-o-right fa-2x" style="color:#F36333" aria-hidden="true"></i> </a>-->
+                  </div>
+                </div>
+              </div>
+
+              <!--<div class="panel bg-teal" style="margin-bottom:0">
+                <div class="panel-body text-white">
+                  <div class="col-md-12 padding-0">
+                    <div class="text-left col-md-7 col-xs-12 col-sm-7 padding-0">
+                      <h4 style="margin-top:-1px; margin-bottom:8px">Recommend material</h4>
+                    </div>
+                    <div style="padding-top:0px;" class="text-right col-md-5 col-xs-12 col-sm-5 padding-0">
+                      <span class="fa fa-book fa-2x" style="marin-top:-7px"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel box-v4" ng-controller="MaterialCtrl">
+                <div class="panel-body padding-0" style="margin-top:-10px; padding-top:0">
+                  <div class="col-md-12 col-xs-12 col-md-12 padding-0 box-v4-alert" style="padding-top:0; padding-left:17px; padding-right:15px">
+
+                    <div class="panel box-v1" style="margin-top:20px; -webkit-box-shadow:none; box-shadow:none">
+                      <div class="panel-heading bg-white border-none" style="padding-bottom:0; padding-top:15px">
+                        <h4 class="text-left" style="padding-top:0px; margin-top:0"><a style="color:#009688" href="#/material-detail" onclick="reload()">{{recommended_materials[0].title}}</a></h4>
+                        <p>By: <a>Lextend</a></p>
+                      </div>
+                      <div class="panel-body text-left" style="margin-top:0; padding-top:0">
+                        <p>
+                          {{recommended_materials[0].summary}}
+                        </p>
+                      </div>
+                    </div>
+
+                    <a href="#/material" onclick="reload()" style="float:right; padding-right:7px; font-size:15px; margin-top:-10px; color: #EF8A2F;">See all
+                        <i class="fa fa-hand-o-right fa-2x" style="color:#F36333; padding-left:3px" aria-hidden="true"></i>
+                        </a>
+                  </div>
+                </div>
+              </div>-->
+
+              <!--<div class="panel box-v3">
+                  
+                              <ul class="nav nav-tabs" id="myTab" style="border:none; margin-left:0">
+                              <li  class="active"><a data-target="#home" data-toggle="tab">My Wordbooks</a></li>
+                              <li><a data-target="#profile" data-toggle="tab">Learned words</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                              <div class="tab-pane active" id="home">
+                                
+                                <div class="badges-v1" style="margin-top:30px">
+                                <div class="badges-ribbon">
+                                  <div class="badges-ribbon-content badge-warning">WORDS</div>
+                                </div>
+
+                                <div class="panel-body text-center" style="padding-top:2%">
+                                  <h3 style="color:#009EAD">User active</h3>
+                                  <hr>
+                                  <p>51 words</p>
+                                </div>
+
+                              </div>
+
+                              <div class="badges-v1" style="margin-top:30px">
+                                <div class="badges-ribbon">
+                                  <div class="badges-ribbon-content badge-warning">WORDS</div>
+                                </div>
+
+                                <div class="panel-body text-center" style="padding-top:2%">
+                                  <h3 style="color:#009EAD">Happy</h3>
+                                  <hr>
+                                  <p>35 words</p>
+                                </div>
+
+                              </div>
+
+                              <div class="badges-v1" style="margin-top:30px">
+                                <div class="badges-ribbon">
+                                  <div class="badges-ribbon-content badge-warning">WORDS</div>
+                                </div>
+
+                                <div class="panel-body text-center" style="padding-top:2%">
+                                  <h3 style="color:#009EAD">House</h3>
+                                  <hr>
+                                  <p>35 words</p>
+                                </div>
+
+                              </div>
+
+                              <a href="#/word" style="float:right; padding-right:10px; font-size:15px; margin-top:10px"><i class="fa fa-hand-o-right fa-2x" style="color:#F36333;" aria-hidden="true"></i> See all</a>
+                                
+                              </div>
+                              
+                              
+                              <div class="tab-pane" id="profile">
+                                
+                                <p>
+                        <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> set </a>
+                        <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                      </p>
+                      <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px" />
+
+                      <p>
+                        <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> group </a>
+                        <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                      </p>
+                      <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px" />
+
+                      <p>
+                        <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> game </a>
+                        <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                      </p>
+                      <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px" />
+
+                      <p>
+                        <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> part </a>
+                        <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                      </p>
+                      <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px" />
+
+                      <p>
+                        <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> place </a>
+                        <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                      </p>
+                      <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px" />
+
+                      <p>
+                        <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> lot </a>
+                        <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                      </p>
+                      <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px" />
+
+                      <p>
+                        <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> team </a>
+                        <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                      </p>
+                      <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px" />
+
+                      <p>
+                        <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> world </a>
+                        <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                      </p>
+                      <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px" />
+
+                      <p>
+                        <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> day </a>
+                        <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                      </p>
+                      <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px" />
+                                
+                              </div>
+                              
+                             </div>                    
+                </div>-->
+            </div>
+
+            <div class="col-md-12 padding-0">
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-12 card-wrap padding-0">
+          <!--<div class="col-md-6">
+              <div class="panel">
+                <div class="panel-heading bg-white border-none" style="padding:20px;">
+                  <div class="col-md-6 col-sm-6 col-sm-12 text-left">
+                    <h4>Staticstics</h4>
+                  </div>
+                </div>
+                <div class="panel-body" style="padding-bottom:20px; margin-top:20px">
+                   <div class="col-md-12">
+                     <div class="panel box-v1">
+                       <div id="area-example" style="height: 300px;"></div>
+                       </div>
+                  </div>
+                </div>
+              </div>
+            </div>-->
+
+          <!--<div class="col-md-6">
+              <div class="panel bg-teal" style="margin-bottom:0">
+                <div class="panel-body text-white">
+                  <div class="col-md-12 padding-0">
+                    <div class="text-left col-md-7 col-xs-12 col-sm-7 padding-0">
+                      <h4 style="margin-top:5px; margin-bottom:0">My notes</h4>
+                    </div>
+                    <div style="padding-top:0px;" class="text-right col-md-5 col-xs-12 col-sm-5 padding-0">
+                      <span class="fa fa-sticky-note fa-2x"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel">
+                <div class="panel-body">
+                  <div class="col-md-12">
+                    <div class="panel box-v1">
+                      <div class="panel-heading bg-white border-none">
+                        <h4 class="text-left" style="padding-top:10px;"><a style="color:#009688">Your brits on internet</a></h4>
+                        <p>By: <a>Lextend</a></p>
+                      </div>
+                      <div class="panel-body text-left" style="margin-top:0; padding-top:0">
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="panel box-v1">
+                      <div class="panel-heading bg-white border-none">
+                        <h4 class="text-left" style="padding-top:10px;"><a style="color:#009688">Hiphop can help</a></h4>
+                        <p>By: <a>Lextend</a></p>
+                      </div>
+                      <div class="panel-body text-left" style="margin-top:0; padding-top:0">
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                   <a href="#/material" style="float:right; padding-right:10px; font-size:15px"><i class="fa fa-hand-o-right fa-2x" style="color:#F36333;" aria-hidden="true"></i> See all</a>
+                </div>
+              </div>
+            </div>-->
+        </div>
+      </div>
+
+    </div>
+    <!-- end: content -->
+
+  </div>
+
+  <!-- start: Mobile -->
+  <div id="mimin-mobile" class="reverse">
+    <div class="mimin-mobile-menu-list">
+      <div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
+        <ul class="nav nav-list">
+          <li class="active ripple">
+            <a class="tree-toggle nav-header"><span class="fa-home fa"></span> Home 
+              </a>
+          </li>
+          <li class="ripple">
+            <a class="tree-toggle nav-header">
+              <span class="fa-wikipedia-w fa"></span> Words
+            </a>
+          </li>
+          <li class="ripple">
+            <a class="tree-toggle nav-header">
+              <span class="fa-book fa"></span> Materials
+            </a>
+          </li>
+          <li class="ripple">
+            <a class="tree-toggle nav-header">
+              <span class="fa-bars fa"></span> Other
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
+        <span class="fa fa-bars"></span>
+      </button>
+  <!-- end: Mobile -->
+
+  <!-- start: Javascript -->
+  <!--<script src="asset/js/jquery.min.js"></script>-->
+
+
+
+  <!-- plugins -->
+
+  <script src="asset/js/plugins/chart.min.js"></script>
+
+<!--<script>
+  audiojs.events.ready(function() {
+    var as = audiojs.createAll();
+  });
+</script>-->
+
+  <!-- custom -->
+  <!--<script src="asset/js/main.js"></script>-->
+  <script type="text/javascript">
+    function modals(){
+          $('#modal1').modal({
+          backdrop: 'static',
+          keyboard: false
+      });
+    };
+
+      function muted(){
+          // document.getElementById('iaudio').muted = true;
+          var player =   document.getElementById('iaudio');
+          player.src = "";
+      };
+        
+        function reload(){
+          $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+          // $(document.body).scrollTop(0);
+          // window.location.reload(true);
+        };
+        
+        //Morris charts snippet - js
+$.getScript('http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',function(){
+$.getScript('http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.0/morris.min.js',function(){
+
+  Morris.Area({
+    element: 'area-example',
+    data: [
+      { y: '1.1.', a: 100, b: 90 },
+      { y: '2.1.', a: 75,  b: 65 },
+      { y: '3.1.', a: 50,  b: 40 },
+      { y: '4.1.', a: 75,  b: 65 },
+      { y: '5.1.', a: 50,  b: 40 },
+      { y: '6.1.', a: 75,  b: 65 },
+      { y: '7.1.', a: 100, b: 90 }
+    ],
+    xkey: 'y',
+    ykeys: ['a', 'b'],
+    labels: ['Series A', 'Series B']
+  });
+  
+  Morris.Line({
+        element: 'line-example',
+        data: [
+          {year: '2010', value: 20},
+          {year: '2011', value: 10},
+          {year: '2012', value: 5},
+          {year: '2013', value: 2},
+          {year: '2014', value: 20}
+        ],
+        xkey: 'year',
+        ykeys: ['value'],
+        labels: ['Value']
+      });
+      
+      Morris.Donut({
+        element: 'donut-example',
+        data: [
+         {label: "Android", value: 12},
+         {label: "iPhone", value: 30},
+         {label: "Other", value: 20}
+        ]
+      });
+      
+      Morris.Bar({
+         element: 'bar-example',
+         data: [
+            {y: 'Jan 2014', a: 100},
+            {y: 'Feb 2014', a: 75},
+            {y: 'Mar 2014', a: 50},
+            {y: 'Apr 2014', a: 75},
+            {y: 'May 2014', a: 50},
+            {y: 'Jun 2014', a: 75}
+         ],
+         xkey: 'y',
+         ykeys: ['a'],
+         labels: ['Visitors', 'Conversions']
+      });
+  
+});
+});
+        
+    </script>
+  <!-- end: Javascript -->

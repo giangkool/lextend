@@ -1,0 +1,237 @@
+     <style>
+      .box-v4 .panel-body .box-v4-alert {
+        border-bottom: none;
+        padding-bottom: 2px;
+      }
+      .box-v3 {
+            padding-top: 0px;
+           padding-bottom: 50px;
+        }
+        .nav-tabs.nav-tabs-v3 {
+            border-bottom: 2px solid #DDD;
+            padding-top: 0px;
+            margin-bottom: 10px;
+        }
+         .btn-success,
+        .label-success,
+        .alert-success,
+        .badge-success {
+          color: #fff !important;
+          border: none !important;
+          background-color: #00838F !important;
+        }
+        .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+          color: #00838F;
+          cursor: default;
+          border: none;
+          border-bottom: 1px solid  #00838F;  
+        }
+        a, a:hover {
+          color: #918F99;
+          cursor: pointer;
+        }
+    </style>
+      <div class="container-fluid mimin-wrapper">
+
+          <!-- start: content -->
+            <div id="content">
+              <div class="panel box-shadow-none content-header" style="margin-bottom:0">
+            <div class="panel-body" style="padding:0; padding-left:15px">
+                <div class="col-md-12">
+                    <h3 class="animated fadeInLeft ng-binding">
+                     <!--<button onclick="window.location.href='#/word'" style="border:none; background:transparent"><i class="fa fa-hand-o-left" style="color:#F36E14; font-size:27px; margin-left:-12px; margin-right:7px"></i></button>-->
+                      Words
+                    </h3>
+                </div>
+            </div>
+        </div>
+        
+                <div class="col-md-12 padding-0" style="padding:20px;">
+                  <div class="panel-body" style="padding-top:0">
+                    <div class="col-md-12 padding-0">
+                                <div class="panel box-v3">
+                                    <ul class="nav nav-tabs" id="myTab" style="border:none">
+                                      <li  class="active"><a data-target="#home" data-toggle="tab">My Wordbooks</a></li>
+                                      <li><a data-target="#profile" data-toggle="tab">Learned words</a></li>
+                                    </ul>
+                                    
+                                    <div class="tab-content">
+                                      <div class="tab-pane active" id="home" style="margin-bottom:25px">
+                                        <center>
+                                          <a href="#/wordbook-detail/{{content.title}}" onclick="reload()" ng-click="_detail(content.wordbookUri)" ng-repeat="content in result.wordbooks">
+                                            <div class="badges-v1" style="margin-top:30px; margin-left:50px; margin-right:50px; display: -webkit-inline-box;" >
+                                              <div class="badges-ribbon">
+                                                <div class="badges-ribbon-content badge-warning">WORDS</div>
+                                              </div>
+                                              
+                                              <div class="panel-body text-center" style="padding-top:2%; padding-left:6%">
+                                                  <div style="height:35px; width:160px">
+                                                    <h4 style="color:#009EAD; margin-top:12px">{{content.title}}</h4>
+                                                  </div>
+                                                  <hr>
+                                                  <p>{{content.numWords}}</p>
+                                              </div>
+                                            </div>
+                                          </a>                                        
+                                  
+                                        </center>
+                                         <div class="btn-group right" role="group" aria-label="..." style="margin-top:20px;">
+                                                    <a href="#/add-system-wordbook" onclick="reload()" type="button" class="btn btn-danger">
+                                                    <span class="fa fa-plus" style="padding-top:3px"></span>
+                                                    Add system wordbook
+                                                    </a>
+                                                    
+                                                    <a href="#/create-new-bookbook" onclick="reload()" type="button" class="btn btn-warning">
+                                                    <span class="fa fa-plus" style="padding-top:3px"></span>
+                                                    Create new wordbook
+                                                    </a>
+                                                  </div>  
+                                        
+                                      </div>
+                                      <div class="tab-pane" id="profile">
+                                        
+                                          <p>
+                                         <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> set </a>
+                                         <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                                        </p>
+                                        <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px"/>
+                                        
+                                        <p>
+                                         <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> group </a>
+                                         <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                                        </p>
+                                        <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px"/>
+                                        
+                                        <p>
+                                         <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> game </a>
+                                         <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                                        </p>
+                                        <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px"/>
+                                        
+                                        <p>
+                                         <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> part </a>
+                                         <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                                        </p>
+                                        <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px"/>
+                                        
+                                        <p>
+                                         <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> place </a>
+                                         <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                                        </p>
+                                        <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px"/>
+                                        
+                                        <p>
+                                         <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> lot </a>
+                                         <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                                        </p>
+                                        <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px"/>
+                                        
+                                        <p>
+                                         <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> team </a>
+                                         <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                                        </p>
+                                        <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px"/>
+                                        
+                                        <p>
+                                         <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> world </a>
+                                         <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                                        </p>
+                                        <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px"/>
+                                        
+                                        <p>
+                                         <a style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500"> day </a>
+                                         <button class="btn ripple-infinite btn-round btn-warning" style="float:right; margin-top:2px">
+                                            <div style="height:6px; width:50px"></div>
+                                          </button>
+                                        </p>
+                                        <hr style="padding-top:0; margin-top:0; border-top: 1px solid #CCCCCC; margin-bottom:9px"/>
+                                        
+                                      </div>
+                                      
+                                    </div>                        
+                                </div>
+                            </div>
+                            </div>
+                  <div class="col-md-12 card-wrap padding-0">
+                    </div>
+                </div>
+      		  </div>
+          <!-- end: content -->
+          
+      </div>
+
+      <!-- start: Mobile -->
+      <div id="mimin-mobile" class="reverse">
+        <div class="mimin-mobile-menu-list">
+            <div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
+                <ul class="nav nav-list">
+                   <li class="active ripple">
+                      <a class="tree-toggle nav-header"><span class="fa-home fa"></span> Home 
+                        <!--<span class="fa-angle-right fa right-arrow text-right"></span>-->
+                      </a>
+                      <!--<ul class="nav nav-list tree">
+                          <li><a href="dashboard-v1.html">Dashboard v.1</a></li>
+                          <li><a href="dashboard-v2.html">Dashboard v.2</a></li>
+                      </ul>-->
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa-wikipedia-w fa"></span> Words
+                        <!--<span class="fa-angle-right fa right-arrow text-right"></span>-->
+                      </a>
+                      <!--<ul class="nav nav-list tree">
+                        <li><a href="topnav.html">Top Navigation</a></li>
+                        <li><a href="boxed.html">Boxed</a></li>
+                      </ul>-->
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa-book fa"></span> Materials
+                        <!--<span class="fa-angle-right fa right-arrow text-right"></span>-->
+                      </a>
+                      <!--<ul class="nav nav-list tree">
+                        <li><a href="chartjs.html">ChartJs</a></li>
+                        <li><a href="morris.html">Morris</a></li>
+                        <li><a href="flot.html">Flot</a></li>
+                        <li><a href="sparkline.html">SparkLine</a></li>
+                      </ul>-->
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa-bars fa"></span> Other
+                      </a>
+                    </li>
+                  </ul>
+            </div>
+        </div>       
+      </div>
+      
+      <button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
+        <span class="fa fa-bars"></span>
+      </button>
+       <!-- end: Mobile -->
+  <script>
+    function reload(){
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+          // $(document.body).scrollTop(0);
+          // window.location.reload(true);
+        };
+  </script>

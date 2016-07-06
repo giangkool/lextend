@@ -1,0 +1,38 @@
+<!-- start:Left Menu -->
+    <div id="left-menu">
+      <div class="sub-left-menu scroll" style="z-index:0">
+        <ul class="nav nav-list">
+          <li class="ripple">
+            <a href="#/" class="tree-toggle nav-header" onclick="reload()"><span class="fa-home fa"></span> Home 
+            </a>
+          </li>
+          <li class="ripple">
+            <a href="#/word" class="tree-toggle nav-header" onclick="reload()">
+              <span class="fa-wikipedia-w fa"></span> Words
+            </a>
+          </li>
+          <li>
+            <a href="#/material" onclick="reload()">
+              <span class="fa-book fa"></span> Materials
+            </a>
+          </li>
+          <li class="ripple">
+            <a href="#/other" class="tree-toggle nav-header" onclick="reload()">
+              <span class="fa-bars fa"></span> Other
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- end: Left Menu -->
+    <script src="asset/js/plugins/moment.min.js"></script>
+    <script src="asset/js/plugins/jquery.nicescroll.js"></script>
+    <script src="asset/js/jquery.ui.min.js"></script>
+    <script src="asset/js/bootstrap.min.js"></script>
+    <script src="asset/js/main.js"></script>
+    <script>
+      function reload(){
+          $(document.body).scrollTop(0);
+          // window.location.reload(true);
+        };
+    </script>

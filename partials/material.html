@@ -1,0 +1,198 @@
+<style>
+  .box-v4 .panel-body .box-v4-alert {
+    border-bottom: none;
+    padding-bottom: 2px;
+  }
+  
+  .box-v3 {
+    padding-top: 0px;
+    padding-bottom: 50px;
+  }
+  
+  .nav-tabs.nav-tabs-v3 {
+    border-bottom: 2px solid #DDD;
+    padding-top: 0px;
+    margin-bottom: 10px;
+  }
+  
+  .nav-tabs>li.active>a,
+  .nav-tabs>li.active>a:focus,
+  .nav-tabs>li.active>a:hover {
+    color: #00838F;
+    cursor: default;
+    border: none;
+    border-bottom: 1px solid #00838F;
+  }
+  
+  a,
+  a:hover {
+    color: #918F99;
+    cursor: pointer;
+  }
+</style>
+<div class="container-fluid mimin-wrapper">
+
+
+  <!-- start: content -->
+  <div id="content">
+    <div class="panel box-shadow-none content-header" style="margin-bottom:0">
+      <div class="panel-body" style="padding:0; padding-left:10px">
+        <div class="col-md-12">
+          <h3 class="animated fadeInLeft ng-binding">
+            <!--<button onclick="window.location.href='#/word'" style="border:none; background:transparent"><i class="fa fa-hand-o-left" style="color:#F36E14; font-size:27px; margin-left:-12px; margin-right:7px"></i></button>-->
+            Materials
+          </h3>
+          <!-- ngRepeat: item in settings.settings -->
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 padding-0" style="padding:20px;" ng-controller="MaterialCtrl">
+      <div class="col-md-12 padding-0">
+
+        <div class="panel box-v1" style="margin-top:30px" ng-repeat="material in user_materials">
+          <div class="panel-heading bg-white border-none">
+            <h4 class="text-left" style="padding-top:10px;"><a style="color:#009688" href="#/material-detail/{{material.title}}" ng-click="getdetail(material.materialUri)" onclick="reload()">{{material.title}}</a></h4>
+            <p>By: <a style="color:#2196F3">{{material.author}}</a></p>
+          </div>
+          <div class="panel-body text-left" style="margin-top:0; padding-top:0">
+            <p>
+              {{material.summary}}
+            </p>
+            <p>
+              <img src="{{material.picUri}}" class="img-thumbnail" style="margin-top:10px">
+            </p>
+            <div class="col-md-12 top-10">
+                <button class="btn" ng-click="like(material.materialUri)">
+                                              <i ng-hide="material.userLiked" class="icon-like icons"> {{material.numLikes}}</i>
+                                              <i ng-hide="!material.userLiked" class="icon-like icons" style="color:#009DD8"> {{material.numLikes}}</i>
+                                               
+                                            </button>
+                    <a class="btn">
+                                              <i class="icon-bubble icons"></i> {{material.numComments}}
+                                            </a>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!--data-toggle="modal" data-target="#modal1"-->
+        <a href="#/add-material" onclick="reload()">
+          <button class=" btn btn-circle ripple-infinite btn-sm btn-success right" value="primary" style="margin-top:10px">
+                                            <div>
+                                            <span class="fa fa-plus"></span>
+                                            </div>
+                                          </button>
+        </a>
+
+        <div class="modal fade" id="modal1" role="dialog">
+          <div class="modal-dialog" style="width:800px">
+            <div class="modal-content">
+              <div class="modal-header" style="background:#00838F; height:50px; text-align:center">
+                <h4 style="color:#fff; margin-top: -1px; display: -webkit-inline-box;">Create note</h4>
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
+              </div>
+              <div class="modal-body">
+                <input type="text" class="modal-content-right-text-mail" style="border:none; margin-bottom:0; width:100%" placeholder="Title">
+                <hr style="margin-top:0" />
+                <!--<textarea rows="10" cols="107" placeholder="Note content" style="border:none"></textarea>-->
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" style="background-color:#00838F">Save</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 card-wrap padding-0">
+  </div>
+</div>
+<!-- end: content -->
+
+<!-- start: Mobile -->
+<div id="mimin-mobile" class="reverse">
+  <div class="mimin-mobile-menu-list">
+    <div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
+      <ul class="nav nav-list">
+        <li class="active ripple">
+          <a class="tree-toggle nav-header"><span class="fa-home fa"></span> Home 
+                        <!--<span class="fa-angle-right fa right-arrow text-right"></span>-->
+                      </a>
+          <!--<ul class="nav nav-list tree">
+                          <li><a href="dashboard-v1.html">Dashboard v.1</a></li>
+                          <li><a href="dashboard-v2.html">Dashboard v.2</a></li>
+                      </ul>-->
+        </li>
+        <li class="ripple">
+          <a class="tree-toggle nav-header">
+            <span class="fa-wikipedia-w fa"></span> Words
+            <!--<span class="fa-angle-right fa right-arrow text-right"></span>-->
+          </a>
+          <!--<ul class="nav nav-list tree">
+                        <li><a href="topnav.html">Top Navigation</a></li>
+                        <li><a href="boxed.html">Boxed</a></li>
+                      </ul>-->
+        </li>
+        <li class="ripple">
+          <a class="tree-toggle nav-header">
+            <span class="fa-book fa"></span> Materials
+            <!--<span class="fa-angle-right fa right-arrow text-right"></span>-->
+          </a>
+          <!--<ul class="nav nav-list tree">
+                        <li><a href="chartjs.html">ChartJs</a></li>
+                        <li><a href="morris.html">Morris</a></li>
+                        <li><a href="flot.html">Flot</a></li>
+                        <li><a href="sparkline.html">SparkLine</a></li>
+                      </ul>-->
+        </li>
+        <li class="ripple">
+          <a class="tree-toggle nav-header">
+            <span class="fa-bars fa"></span> Other
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
+        <span class="fa fa-bars"></span>
+      </button>
+<!-- end: Mobile -->
+
+<!-- start: Javascript -->
+<!--<script src="asset/js/jquery.min.js"></script>
+    <script src="asset/js/jquery.ui.min.js"></script>
+    <script src="asset/js/bootstrap.min.js"></script>-->
+
+
+<!-- plugins -->
+<!--<script src="asset/js/plugins/moment.min.js"></script>
+    <script src="asset/js/plugins/fullcalendar.min.js"></script>
+    <script src="asset/js/plugins/jquery.nicescroll.js"></script>
+    <script src="asset/js/plugins/jquery.vmap.min.js"></script>
+    <script src="asset/js/plugins/maps/jquery.vmap.world.js"></script>
+    <script src="asset/js/plugins/jquery.vmap.sampledata.js"></script>
+    <script src="asset/js/plugins/chart.min.js"></script>-->
+
+
+<!-- custom -->
+<!--<script src="asset/js/main.js"></script>-->
+<!-- end: Javascript -->
+<script>
+    function reload(){
+          $("html, body").animate({
+              scrollTop: 0
+          }, 600);
+        };
+  </script>
