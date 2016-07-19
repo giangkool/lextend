@@ -34,7 +34,7 @@
     background: transparent;
     border: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 100;
   }
 </style>
@@ -64,10 +64,11 @@
             <p>By: <a style="color:#2196F3">{{material.author}}</a></p>
           </div>
           <div class="panel-body text-left" style="margin-top:0; padding-top:0">
-            <pre ng-bind-html="material.summary">
+            <pre>
+              <code ng-bind-html="material.summary" style="margin-left:-61px"></code>
             </pre>
             <p>
-              <img src="{{material.picUri}}" class="img-thumbnail" style="margin-top:5px; margin-left:7px">
+              <img ng-hide="material.picUri == null" ng-src="{{material.picUri}}" class="img-thumbnail" style="margin-top:5px; margin-left:7px">
             </p>
             <div class="col-md-12 top-10">
                 <button class="btn" ng-click="like(material.materialUri)">

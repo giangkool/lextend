@@ -123,12 +123,12 @@ angular.module('dataServices', [])
                 return $http.post(url, parameter, {headers: {'Content-Type': 'application/json', 'app_id': 'lextenweb_1.0.0.0'} });
             },
             postSuggestions: function (auth_token, word) {
-                console.log(word);
                 var parameter = JSON.stringify({ from_lang: 'eng', to_lang: 'vie', word: word });
                 var url = api_gateway_url + "dictionary/lookup_suggestions";
                 return $http.post(url, parameter, { headers: { 'Content-Type': 'application/json', 'app_id': 'lextenweb_1.0.0.0', 'auth_token': auth_token } });
             },
             postDictionarylook: function (auth_token, word) {
+                console.log(word);
                 var parameter = JSON.stringify({ from_lang: 'eng', to_lang: 'vie', word: word, show_example: true });
                 var url = api_gateway_url + "dictionary/lookup";
                 return $http.post(url, parameter, { headers: { 'Content-Type': 'application/json', 'app_id': 'lextenweb_1.0.0.0', 'auth_token': auth_token } });
@@ -151,6 +151,11 @@ angular.module('dataServices', [])
             postCreateMaterial: function (auth_token, lang, vialang, material) {
                 var parameter = JSON.stringify({ lang_id: lang, lang_via_id: vialang, title: material.title, content: material.content});
                 var url = api_gateway_url + "material/create";
+                return $http.post(url, parameter, { headers: { 'Content-Type': 'application/json', 'app_id': 'lextenweb_1.0.0.0', 'auth_token': auth_token } });
+            },
+            postUpdateMaterial: function (auth_token, lang, vialang, material) {
+                var parameter = JSON.stringify({ lang_id: lang, lang_via_id: vialang, material_uri: material.uri, title: material.title, content: material.content});
+                var url = api_gateway_url + "material/edit";
                 return $http.post(url, parameter, { headers: { 'Content-Type': 'application/json', 'app_id': 'lextenweb_1.0.0.0', 'auth_token': auth_token } });
             },
             postNewlanguage: function (auth_token, lang, vialang) {

@@ -10,7 +10,13 @@
         text-shadow: none;
         margin-top:-10px;
     }
-
+  .definitions li{
+    text-indent: 15px;
+  }
+  .definitions strong{
+    color: #EF8A2F;
+    text-transform: uppercase;
+  }
 </style>
 <div class="container-fluid mimin-wrapper">
       
@@ -48,7 +54,10 @@
                                   <div class="col-sm-3 text-center">
                                    <a>
                                         <h3>
-                                            <a ng-click="submitEntry(first_today_word.word)">{{first_today_word.word}} <i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a>
+                                            <a onclick="play()">{{first_today_word.word}} <i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a>
+                                            <audio hidden id="iaudio" ng-repeat="content in first_today_word.pronid2Pron" ng-src="{{url(content.audioUri)}}" autoplay controls preload="none">
+                                                      Your browser does not support the audio element.
+                                            </audio>
                                         </h3>
                                    </a>
                                     <hr style="width:80%; margin-top:10px; margin-bottom:10px"/>
@@ -78,9 +87,10 @@
                                         
                                   <div class="col-sm-9">
                                     <p id="phint" ng-hide="!phint" ng-repeat="content in first_today_word.examples" style="padding-left:25px; border-left:1px solid #eee; font-weight:100">
-                                       {{content}}
+                                       - <b style="color:#6EA9D0">{{content.sentence}}</b><br/>
+                                       <span style="margin-left:10px">{{content.translationText}}</span>
                                     </p>
-                                    <p id="pdefinition" ng-bind-html="content" ng-hide="!pdifinition" ng-repeat="content in first_today_word.definitions" style="padding-left:25px; border-left:1px solid #eee; font-weight:100">
+                                    <p class="definitions" id="pdefinition" ng-bind-html="content.toString().replaceAll('pos','strong').replaceAll('def','li').replaceAll('0','')" ng-hide="!pdifinition" ng-repeat="content in first_today_word.definitions" style="padding-left:25px; border-left:1px solid #eee; font-weight:100">
                                         <!--{{content}}-->
                                     </p>
                                   </div>
@@ -94,7 +104,10 @@
                                 <div class="col-md-12">
                                   <div class="col-sm-3 text-center">
                                         <h3>
-                                           <a ng-click="submitEntry(word.word)"> {{word.word}} <i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a>
+                                           <a onclick="play()"> {{word.word}} <i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a>
+                                            <audio hidden id="iaudio" ng-repeat="content in word.pronid2Pron" ng-src="{{url(content.audioUri)}}" autoplay controls preload="none">
+                                                      Your browser does not support the audio element.
+                                            </audio>
                                         </h3>
                                     <hr style="width:80%; margin-top:10px; margin-bottom:10px"/>
                                     <div class="col-md-12">
@@ -124,8 +137,7 @@
                                         - <span style="color:#2196F3">{{content.sentence}}</span><br/>
                                         {{content.translationText}}
                                     </p>
-                                    <p id="pdefinition2" ng-bind-html="content" ng-hide="!pdifinition" ng-repeat="content in word.definitions" style="padding-left:25px; border-left:1px solid #eee; font-weight:100">
-                                            <!--{{content}}-->
+                                    <p class="definitions" id="pdefinition2" ng-bind-html="content.toString().replaceAll('pos','strong').replaceAll('def','li').replaceAll('0','')" ng-hide="!pdifinition" ng-repeat="content in word.definitions" style="padding-left:25px; border-left:1px solid #eee; font-weight:100">
                                     </p>
                                   </div>
                                 </div>
@@ -144,6 +156,11 @@
     </div>
 </div>
 <script>
+     function play(){
+          // document.getElementById('iaudio').muted = true;
+          var player =   document.getElementById('iaudio');
+          player.play();
+      };
     // interval is in milliseconds. 1000 = 1 second - so 1000 * 10 = 10 seconds
     $('.carousel').carousel({
     interval: false

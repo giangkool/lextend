@@ -1,0 +1,91 @@
+     <style>
+         .mail-wrapper .mail-right .mail-right-content .note-editable {
+        color: #000;
+        font-size: 18px;
+        font-weight: 400;
+        background: #EDF0F1;
+        height: 300px;
+    }
+      .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+          color: #00838F;
+          cursor: default;
+          border: none;
+          border-bottom: 1px solid  #00838F;  
+        }
+        .nav-tabs.nav-tabs-v3 {
+            border-bottom: 2px solid #DDD;
+            padding-top: 0px;
+            margin-bottom: 10px;
+        }
+        a, a:hover {
+          color: #918F99;
+          cursor: pointer;
+        }
+     </style>
+      <div class="container-fluid mimin-wrapper">
+          <!-- start: Content -->
+          <div id="content">
+                  <div class="panel box-shadow-none content-header" style="margin-bottom:0">
+            <div class="panel-body" style="padding:0; padding-left:25px">
+                <div class="col-md-12">
+                    <h3 class="animated fadeInLeft ng-binding">
+                     <a href="#/material-detail/{{m_detail.material.title}}" onclick="reload()" style="border:none; background:transparent"><i class="fa fa-hand-o-left" style="color:#F36E14; font-size:27px; margin-left:-12px; margin-right:7px"></i></a>
+                      Edit Materials
+                    </h3>
+                </div>
+            </div>
+        </div>
+        
+            <div class="col-md-12" style="padding:20px;">
+              <div class="panel mail-wrapper">
+                  <div class="panel-body">
+                      <div class="col-md-12 padding-0">
+                        <div class="col-md-12 col-sm-12 padding-0 mail-right" style="padding-top:0">
+                          <div class="col-md-12 mail-right-tool" style="padding-top:0">
+                            <ul id="tabs-demo4" class="nav nav-tabs nav-tabs-v3" role="tablist">
+                                      <li role="presentation" class="active">
+                                        <input ng-model="materials.title" type="text" class="modal-content-right-text-mail" style="border:none; width:200%; margin-bottom:-10px" placeholder="{{m_detail.material.title}}">
+                                        <a aria-expanded="true"></a>
+                                      </li>
+                                    </ul>
+                          </div>
+                          <div id="tabsDemo4Content" class="tab-content tab-content-v3">
+                                      <div role="tabpanel" class="tab-pane fade active in" id="tabs-demo4-area1" aria-labelledby="tabs-demo4-area1" style="margin-bottom:13px">                                                            
+                                              <textarea id="mcontent" ng-model="materials.content" class="box-v7-commenttextbox" rows="10" style="display:block; width:100%; border-color:#CCCCCC; padding:5px">{{m_detail.material.content}}abc</textarea>
+                                              <button class="btn ripple-infinite  btn-warning right top-20" onclick="if (event.keyCode == 13) document.getElementById('mcontent').val().replaceAll('/\n/g','<br/>')" ng-click="updatematerial(material)" style="width:90px">
+                                                <div>
+                                                  <span>Save</span>
+                                                </div>
+                                              </button>                                                               
+                                      </div>                                                              
+                                    </div>
+
+                        </div>
+                      </div>
+                  </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- end: Content -->
+  </div>
+    <!-- custom -->
+     <script type="text/javascript">
+     
+     function reload(){
+          $("html, body").animate({
+              scrollTop: 0
+          }, 600);
+        };
+        
+      (function(jQuery){
+           $('input').iCheck({
+              checkboxClass: 'icheckbox_flat-red',
+              radioClass: 'iradio_flat-red'
+            });
+
+              $('.summernote').summernote({
+                height: 750
+              });
+        })(jQuery);
+     </script>

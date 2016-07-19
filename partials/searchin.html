@@ -1,0 +1,77 @@
+<!--Dictionary-->
+                 <div class="panel box-v7" style="margin-top:0">
+                     <div class="pull-right article-v1-time">
+                        <div class="panel box-v1" style="margin-top:0px">
+
+                            
+                                    <div class="col-md-12 tabs-area box-shadow-none" style="margin-top:0">
+                                        
+                                        <div class="search" style="background:#009688; margin-top:0px; margin-bottom:30px">
+                                        <div class="input-group searchbox-v1">
+                                            <span class="input-group-addon  border-none box-shadow-none" id="basic-addon1" style="background:#fff">
+                                                    <span class="fa fa-search" style="color:#EF8A2F"></span>
+                                            </span>
+                                            <!--<input list="bank" ng-model="word" type="text" class="txtsearch border-none box-shadow-none" placeholder="Dictionary Search"
+                                            aria-describedby="basic-addon1" style="border-radius:10px" ng-keydown="lookupm(word)" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()"
+                                            />-->
+                                            <input list="bank" ng-model="word" type="text" class="txtsearch border-none box-shadow-none" placeholder="Dictionary Search"
+                                            aria-describedby="basic-addon1" style="border-radius:10px" ng-change="lookupm(word)" ng-enter="search_click()"
+                                            />
+
+                                            <img ng-if="loadding" src="images/loading.gif" style="height:40px; margin-left:-42px; margin-top:-5px" />
+                                            <!--<input type="button" id="btnSearch" value="Search" ng-click="search_click()" hidden/>-->
+                                            <datalist id="bank" style="width:120%">
+                                                 <option ng-repeat="item in suggestions" ng-enter="search_click()" value="{{item}}"></option>
+                                            </datalist>
+                                        </div>
+                                        </div>
+
+                                        <div id="tabsDemo6Content" class="tab-content tab-content-v6 col-md-12" style="padding-top:0 !important; margin-top:-15px" ng-hide="hidedefi">
+                                           
+                                           <center ng-if="loadding">
+                                            <img src="images/g-dots.gif">
+                                           </center>
+
+                                        <div ng-if="!loadding">
+                                          <div role="tabpanel" class="tab-pane search-v1-menu1 fade active in" id="tabs-demo7-area1" aria-labelledby="tabs-demo7-area1">
+                                            <div class="col-md-12 padding-0">
+                                                <div class="media" style="height:auto">
+                                                    <div class="media-body" ng-hide="nonword">
+                                                    <audio hidden id="iaudio" ng-repeat="content in lookdictionary.pronid2Pron" ng-src="{{url(content.audioUri)}}" autoplay controls preload="none">
+                                                        Your browser does not support the audio element.
+                                                    </audio>
+                                                    <a class="media-heading" style="font-size:20px; margin-left:26px; text-transform: uppercase; font-weight:400" onclick="play()">{{lookdictionary.word}} <i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer; font-size:19px"></i></a><br/>
+                                                    <!--<a class="media-heading" style="font-size:24px; margin-left:26px; text-transform: uppercase" ng-click="submitEntry()">{{lookdictionary.word}} <i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a><br/>-->
+                                                    <blockquote class="definitions">
+                                                        <!--<p>{{lookdictionary.definitions}}</p>-->
+                                                        <p ng-bind-html="lookdictionary.definitions.toString().replaceAll('pos','strong').replaceAll('def','li').replaceAll('0','').replaceAll(',','')"></p>
+                                                    </blockquote><br/>
+                                                    <div class="col-md-12" ng-show="lookdictionary.examples[0]">
+                                                        <h3 style="font-size: 20px; text-transform: uppercase; font-weight: 400; margin-left:13px; margin-top:0">Examples</h3>
+                                                        <dl ng-repeat="content in lookdictionary.examples" style="margin-bottom:7px; padding-bottom:7px; border-bottom: 1px dashed #d7edfc;">
+                                                            <dt style="font-size:17px;"><a style="font-weight:400; color:#6EA9D0" ng-bind-html="content.sentence"></a></dt>
+                                                            <dd style="font-size:15px; font-weight:300" ng-bind-html="content.translationText"></dd>
+                                                        </dl>
+                                                    </div>
+                                                    </div>
+                                                    <div class="media-body" ng-hide="!nonword">
+                                                    <a style="font-size:24px; margin-left:26px; text-transform: uppercase;" ng-hide="hover"> {{key}} </a>
+                                                    <a style="font-size:24px; margin-left:26px; text-transform: uppercase;" ng-hide="!hover"> {{model.word}} </a>
+                                                    <blockquote>
+                                                        <p> not fount in dictionary!</p>
+                                                    </blockquote><br/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        </div>
+                                        
+
+
+                                    </div>             
+
+                        </div>
+                     </div>
+                 </div>

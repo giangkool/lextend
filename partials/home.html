@@ -63,12 +63,15 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 
-  .definitions li{
-    text-indent: 15px;
+    .definitions strong{
+      font-size: 17.5px;
+      font-weight:400;
+      color:#EF8A2F;
+      text-transform: capitalize;
   }
-  .definitions strong{
-    color: #EF8A2F;
-    text-transform: uppercase;
+  .definitions li{
+      font-weight:300;
+      font-size:15px;
   }
 </style>
 
@@ -77,27 +80,34 @@
 
   <!-- start: content -->
   <div id="content">
-    <div class="col-md-12" style="padding:20px; margin-bottom:0px">
-      <div class="col-md-12 padding-0" style="padding:15px;">
+    <div class="col-md-12" style="padding:20px; margin-bottom:0px; font-family: 'Roboto', sans-serif;">
+      <div class="col-md-12 padding-0" style="padding-top:7px;">
         <div class="col-md-12 padding-0">
           <div class="col-md-7 padding-0">
             <div class="col-md-12" style="padding-left:0; padding-right:0; margin-left:-10px" ng-controller="MaterialCtrl">
 
               <div class="panel box-v1" style="margin-top:-10px;" ng-repeat="material in recommended_materials">
-                <div class="panel-heading bg-white" style="width: 97%; margin: auto; border-bottom: 1px dashed #d7edfc; padding-left:10px; padding-top:3px; padding-bottom:0">
-                  <h4 class="text-left" style="padding-top:0px;"><a style="color:#009688" href="#/material-detail/{{material.title}}" ng-click="getdetail(material.materialUri)" onclick="reload()">{{material.title}}</a>
+                <div class="panel-heading bg-white" style="width: 97%; margin: auto; border-bottom: 1px dashed #d7edfc; padding-left:10px; padding-top:1px; padding-bottom:0">
+                  <h4 class="text-left" style="padding-top:0px;"><a style="color:#009688; font-weight:500" href="#/material-detail/{{material.title}}" ng-click="getdetail(material.materialUri)" onclick="reload()">{{material.title}}</a>
                   </h4>
-                  <p>By: <a style="color:#2196F3">{{material.author}}</a></p>
+                  <p style="font-weight:100">By <a style="color:#2196F3">{{material.author}}</a></p>
                 </div>
                 <div class="panel-body text-left" style="margin-top:0; padding-top:0">
                   <!--<div>
                     {{material.summary}}
                   </div>-->
 
-                   <pre ng-bind-template="{{material.summary}}" style="margin-bottom:0"></pre>
-
+                   <pre style="padding-bottom:0">
+                     <code  ng-bind-template="{{material.summary}}" style="margin-left:-85px; font-family: 'Roboto', sans-serif; font-weight:300; font-size:15px">
+                     </code>
+                   </pre>
                   <p>
-                    <img ng-src="{{url(meterial.picUri)}}" class="img-thumbnail" style="margin-top:5px; margin-left:7px">
+
+                    <!--<p word-under-cursor="model.word" word-under-cursor-content="model.paragraph1"></p>
+                    <p word-under-cursor="model.word" word-under-cursor-content="model.paragraph2"></p>-->
+                    <!--Word: {{model.word}}-->
+
+                    <img ng-hide="meterial.picUri == null" ng-src="{{url(meterial.picUri)}}" class="img-thumbnail" style="margin-top:5px; margin-left:7px">
                   </p>
                   <div class="col-md-12 top-10">
                     <button class="btn" ng-click="like(material.materialUri)">
@@ -149,14 +159,15 @@
 
           <div class="col-md-5" style="padding-right:0;">
 
-            <div class="search" style="background:#009688; margin-top:-10px; margin-bottom:30px" ng-controller="DictionaryCtrl">
+            <div class="search" style="background:#009688; margin-top:-10px; margin-bottom:10px" ng-controller="DictionaryCtrl">
               <div class="input-group searchbox-v1">
                 <span class="input-group-addon  border-none box-shadow-none" id="basic-addon1" style="background:#fff">
                           <span class="fa fa-search" style="color:#EF8A2F"></span>
                 </span>
                 <input list="bank" ng-model="word" type="text" class="txtsearch border-none box-shadow-none" placeholder="Dictionary Search"
-                  aria-describedby="basic-addon1" style="border-radius:10px" ng-keydown="lookup(word)" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()"
+                  aria-describedby="basic-addon1" style="border-radius:10px" ng-change="lookup(word)" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()"
                 />
+
                 <img ng-if="loadding" src="images/loading.gif" style="height:40px; margin-left:-42px; margin-top:-5px" />
                 <input type="button" id="btnSearch" value="Search" onclick="reload()" ng-click="search_click()" hidden/>
                 <datalist id="bank" style="width:120%">
@@ -166,7 +177,7 @@
             </div>
 
             <div class="col-md-12 padding-0" ng-controller="WordCtrl">
-              <div class="panel bg-teal" style="margin-bottom:0; margin-top:-10px">
+              <div class="panel bg-teal" style="margin-bottom:0; margin-top:0px">
                 <div class="panel-body text-white">
                   <div class="col-md-12 padding-0">
                     <div class="text-left col-md-7 col-xs-12 col-sm-7 padding-0">
@@ -184,51 +195,53 @@
                   <div class="col-md-12 col-xs-12 col-md-12 padding-0 box-v4-alert" style="padding-top:0; padding-left:17px; padding-right:15px">
                     <!--<div style=" overflow: auto; height: 435px;">-->
                      <div ng-hide="hidefirst">
-                        <h2 style="color:red; margin-top:10px">{{first_today_word.word}}
+                        <h2 style="color:#2196F3; margin-top:24px; font-size:20px; text-transform: uppercase;">{{first_today_word.word}}
                           <audio hidden id="iaudio" ng-repeat="content in first_today_word.pronid2Pron" ng-src="{{url(content.audioUri)}}" autoplay controls preload="none">
                                                       Your browser does not support the audio element.
                           </audio>
                         <!--<a class="media-heading" style="font-size:24px; margin-left:0px" ng-click="submitEntry(first_today_word.word)"><i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a><br/>-->
-                        <a class="media-heading" style="font-size:24px; margin-left:0px" onclick="play()"><i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a><br/>
+                        <a class="media-heading" style="margin-left:0px; font-weight:400" onclick="play()"><i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer; font-size:19px"></i></a><br/>
                         </h2>  
-                        <dl ng-repeat="content in first_today_word.examples">
-                                        <h4>{{content.sentence}}
-                                        <a class="media-heading" style="font-size:16px; margin-left:-2px" ng-click="submitEntry(content.sentence)"><i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a><br/>
-                                        </h4>
-                                        <h5>{{content.translationText}}</h5>
-                                    </dl>
-                        
                         <div class="definitions" ng-repeat="content in first_today_word.definitions">
                             <div ng-bind-html="content.toString().replaceAll('pos','strong').replaceAll('def','li').replaceAll('0','')"></div>
                         </div>
-                        <hr style="padding-top:0; margin-top:10px; border-top: 1px dashed #d7edfc; margin-bottom:9px" />
-                        <p style="margin-bottom:5px">Other today words:</p>
-                        <a ng-hide="hidefirst" ng-repeat="word in today_wordsub" style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500" ng-click="show(word.word)">{{word.word}}</a><br/>
+                        <h4 style="font-size: 20px; text-transform: uppercase; font-weight: 400; margin-left: 13px; margin-top: 15px; color:#747373">Examples</h4>
+                        <dl ng-repeat="content in first_today_word.examples" style="margin-bottom:0; margin-top:7px; border-bottom: 1px dashed #d7edfc;">
+                                        <a ng-bind-html="content.sentence" style="padding-right:10px; font-size:17px; color:#6EA9D0; font-weight:500">
+                                        <a class="media-heading" style="font-size:15px; margin-left:-2px; font-weight:300"></a><br/>
+                                        <!--<i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i>-->
+                                        <h5 style="margin-top:3px">{{content.translationText}}</h5>
+                                    </dl>
+                        
+                        <!--<hr style="padding-top:0; margin-top:10px; border-top: 1px dashed #d7edfc; margin-bottom:9px" />-->
+                        <p style="margin-bottom:5px; margin-top:7px">Other today words:</p>
+                        <a ng-hide="hidefirst" ng-repeat="word in today_wordsub" ng-if="$index > 0" style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500" ng-click="show(word.word)">{{word.word}}</a><br/>
                         <a href="#/flash-card" onclick="reload()"> <span style="font-size:17px; color: #EF8A2F;"> {{number_today_words}} new words and 0 words to review</span>                      <i class="fa fa-hand-o-right fa-2x" style="color:#F36333" aria-hidden="true"></i> </a>
                     </div>
 
                     <div ng-hide="!hidefirst">
-                      <h2 style="color:red">{{w_detail.word}}
+                      <h2 style="color:#2196F3; margin-top:24px; font-size:20px; text-transform: uppercase;">{{w_detail.word}}
                         <!--<a class="media-heading" style="font-size:24px; margin-left:0px" ng-click="submitEntry(w_detail.word)"><i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a><br/>-->
                          <a class="media-heading" style="font-size:24px; margin-left:0px" onclick="play()"><i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a><br/>  
                         </h2>
                         <div class="definitions" ng-repeat="content in w_detail.definitions">
                            <div ng-bind-html="content.toString().replaceAll('pos','strong').replaceAll('def','li').replaceAll('0','')"></div>
                         </div>
-                        <h4>Examples</h4>
-                        <dl ng-repeat="content in w_detail.examples">
-                                        <a ng-bind-html="content.sentence" style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500">
+                        <h4 style="font-size: 20px; text-transform: uppercase; font-weight: 400; margin-left: 13px; margin-top: 15px; color:#747373">Examples</h4>
+                        <dl ng-repeat="content in w_detail.examples" style="margin-bottom:0; margin-top:7px; border-bottom: 1px dashed #d7edfc;">
+                                        <a ng-bind-html="content.sentence" style="padding-right:10px; font-size:17px; color:#6EA9D0; font-weight:500">
                                           <audio hidden id="iaudio" ng-repeat="content in w_detail.pronid2Pron" ng-src="{{url(content.audioUri)}}" autoplay controls preload="none">
                                                       Your browser does not support the audio element.
                                         </audio>
-                                         <a class="media-heading" style="font-size:17px; margin-left:-2px" onclick="play()"><i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a>
+                                         <a class="media-heading" style="font-size:17px; margin-left:-2px; font-weight:300"></a>
+                                         <!--<i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i>-->
                                         <!--<a class="media-heading" style="font-size:17px; margin-left:-2px" ng-click="submitEntry(content.sentence)"><i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a>-->
                                         </a>
-                                        <dt>{{content.translationText}}</dt>
+                                        <h5 style="margin-top:3px">{{content.translationText}}</h5>
                                     </dl>
-                                    <hr style="padding-top:0; margin-top:0; border-top: 1px dashed #d7edfc; margin-bottom:9px" />
-                    <p style="margin-bottom:5px">Other today words:</p>
-                    <a ng-repeat="word in today_words" style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500" ng-click="show(word.word)">{{word.word}}</a><br/>
+                                    <!--<hr style="padding-top:0; margin-top:0; border-top: 1px dashed #d7edfc; margin-bottom:9px" />-->
+                    <p style="margin-bottom:5px; margin-top:7px">Other today words:</p>
+                    <a ng-repeat="word in today_words" style="padding-right:10px; font-size:16px; color:#6EA9D0; font-weight:500" ng-click="show(word.word);">{{word.word}}</a><br/>
                     <a href="#/flash-card" onclick="reload()"> <span style="font-size:17px; color: #EF8A2F;"> {{number_today_words}} new words and 0 words to review</span>                      <i class="fa fa-hand-o-right fa-2x" style="color:#F36333" aria-hidden="true"></i> </a>
                     </div>
                     <!--</div>-->
@@ -558,6 +571,7 @@
           // document.getElementById('iaudio').muted = true;
           var player =   document.getElementById('iaudio');
           player.play();
+          // player.src="http://www.eslfast.com/robot/audio/crime/crime0501.mp3";
       };
         
         function reload(){

@@ -48,7 +48,8 @@ input[type='text'] {
   -o-border-radius: 0px;
   border-radius: 0px;
   padding: 10px;
-  border-radius: 0px !important;
+  border-radius: 3px !important;
+  margin-left: -2px;
 }
 
 select{

@@ -333,6 +333,64 @@ app
             };
         }
     })
+    .controller('EditMaterialCtrl',  function ($scope, $location, $http, apiService, $localStorage){
+        var auth_token = window.localStorage.getItem('auth_token');
+        var uri = localStorage.getItem('m_uri');
+        if (!auth_token) {
+            window.location.href = '#/login';
+        }
+        else
+        {
+            //detail material
+            apiService.material_detail(auth_token, uri).then(function (response) {
+                $scope.m_detail = response.data.data;
+                console.log($scope.m_detail);
+                
+                $scope.materials=[];
+                $scope.materials.title = "";
+                $scope.materials.content = $scope.m_detail.material.content;
+                $scope.updatematerial = function (material) {
+                    material = [];
+                    if($scope.materials.title == "")
+                    {
+                        material.title = $scope.m_detail.material.title;
+                    }
+                    else{
+                         material.title = $scope.materials.title;
+                    }
+                    material.content = $scope.materials.content;
+                    material.uri = uri;
+                    apiService.postUpdateMaterial(auth_token, $scope.lang, $scope.vialang, material).then(function (response) {
+                        if(response.data.response_code == "00")
+                        {
+                             alert("Update material complete !");
+                                window.setTimeout(function () {
+                                    window.location.href = '#/material-detail/'+material.title;
+                                }, 100);
+                        }
+                        else
+                        {
+                            alert($scope.result.response_message);
+                        }
+                        console.log(response);
+                    });
+                };
+            });
+
+             // get setting
+            apiService.getSettings(auth_token).then(function (response) {
+                for(var i=0; i<response.data.settings.length; i++)
+                {
+                    $scope.lang = response.data.settings[i].langid;
+                    console.log(response);
+                     for (var vialangid in response.data.settings[i].viaLangids) {
+                            var value = response.data.settings[i].viaLangids[vialangid];
+                            $scope.vialang = value;
+                    }
+                }
+            });
+        }
+    })
     .controller('OtherCtrl', function ($scope, $location, $http, apiService, $localStorage) {
         var auth_token = window.localStorage.getItem('auth_token');
         if (!auth_token) {
@@ -512,4 +570,68 @@ app
             }
         }
     })
+    .directive('ngEnter', function () {
+        return function (scope, element, attrs) {
+            element.bind("keydown keypress", function (event) {
+                if(event.which === 13) {
+                    scope.$apply(function (){
+                        scope.$eval(attrs.ngEnter);
+                    });
+    
+                    event.preventDefault();
+                }
+            });
+        };
+    })
+    .directive('wordUnderCursor', function() {
+  return {
+    scope: {
+      wordUnderCursor: "=",
+      wordUnderId: "=",
+      wordUnderCursorContent: "="
+    },
+    link: function(scope, elment) {
+
+      scope.$watch('wordUnderCursorContent', function(newValue) {
+        // console.log(newValue);
+        newValue2 = "";
+        if (newValue) {
+          var $element = $(elment);
+
+        $element.html(newValue.replace(/\b(\w+)\b/g, "<span>$1</span>"));
+        //   $element.find('span').hover(
+        //     function() {
+        //       var $span = $(this);
+        //       $span.css('background-color', '#ffff66');
+        //       scope.$apply(function() {
+        //         scope.wordUnderCursor = $span.text();
+        //         console.log($span.text());
+        //       });
+        //     },
+        //     function() {
+        //       var $span = $(this);
+        //       $span.css('background-color', '');
+        //       scope.$apply(function() {
+        //         scope.wordUnderCursor = "";
+        //       });
+        //     }
+        //   );
+
+          $element.find('span').click(
+              function(){
+                 var $span = $(this);
+            //   $span.css('background-color', '#ffff66');
+              scope.$apply(function() {
+                scope.wordUnderCursor = $span.text();
+                scope.wordUnderId = $span.index();
+              });
+            }); 
+
+
+
+        }
+      });
+    }
+  }
+});
     
