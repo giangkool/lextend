@@ -10,7 +10,7 @@ app
         //list wordbook
         apiService.postUserwordbook(auth_token).then(function (response) {
             $scope.result = response.data.data;
-            // console.log($scope.result);
+            console.log($scope.result);
         });
         // get uri    
         $scope._detail = function (uri) {
