@@ -1,227 +1,325 @@
-     <style>
-      .box-v4 .panel-body .box-v4-alert {
-        border-bottom: none;
-        padding-bottom: 2px;
-      }
-      .box-v3 {
-            padding-top: 0px;
-           padding-bottom: 50px;
-        }
-        .nav-tabs.nav-tabs-v3 {
-            border-bottom: 2px solid #DDD;
-            padding-top: 0px;
-            margin-bottom: 10px;
-        }
-         .btn-success,
-        .label-success,
-        .alert-success,
-        .badge-success {
-          color: #fff !important;
-          border: none !important;
-          background-color: #00838F !important;
-        }
-        .btn-primary,
-        .label-primary,
-        .alert-primary,
-        .badge-primary {
-            color: #fff !important;
-            border: none !important;
-            background-color: #00838F !important;
-        }
-    </style>
- <div class="container-fluid mimin-wrapper">
-          <!-- start: content -->
-            <div id="content" ng-controller="Wordbookdetail">
-              <div class="panel box-shadow-none content-header" style="margin-bottom:0">
-                  <div class="panel-body" style="padding:0; padding-left:17px">
-                      <div class="col-md-12">
-                          <h3 class="animated fadeInLeft ng-binding">
-                          <button onclick="window.location.href='#/word'; reload()" style="border:none; background:transparent"><i class="fa fa-hand-o-left" style="color:#F36E14; font-size:27px; margin-left:-12px; margin-right:7px"></i></button>
-                            Wordbook detail
-                          </h3>
-                          <!-- ngRepeat: item in settings.settings -->
-                      </div>
-                  </div>
-              </div>
-                <div class="col-md-12 padding-0" style="padding:20px">
-                    <div class="col-md-12 padding-0">
-                                <div class="panel box-v3">
-                                    <ul id="tabs-demo4" class="nav nav-tabs nav-tabs-v3" role="tablist">
-                                      <li role="presentation" class="active">
-                                        <a aria-expanded="true">
-                                            <input type="text" ng-model="newwordbook.title" class="modal-content-right-text-mail" style="border:none; width:200%" placeholder="{{wordbook_detail.title}}">
-                                        </a>       
-                                      </li>
-                                        <label style="float:right; padding-top:20px; color:#009688">
+<style>
+  .box-v4 .panel-body .box-v4-alert {
+    border-bottom: none;
+    padding-bottom: 2px;
+  }
+  
+  .box-v3 {
+    padding-top: 0px;
+    padding-bottom: 50px;
+  }
+  
+  .nav-tabs.nav-tabs-v3 {
+    border-bottom: 2px solid #DDD;
+    padding-top: 0px;
+    margin-bottom: 10px;
+  }
+  
+  .btn-success,
+  .label-success,
+  .alert-success,
+  .badge-success {
+    color: #fff !important;
+    border: none !important;
+    background-color: #00838F !important;
+  }
+  
+  .btn-primary,
+  .label-primary,
+  .alert-primary,
+  .badge-primary {
+    color: #fff !important;
+    border: none !important;
+    background-color: #00838F !important;
+  }
+</style>
+<div class="container-fluid mimin-wrapper">
+  <!-- start: content -->
+  <div id="content" ng-controller="Wordbookdetail">
+    <div class="panel box-shadow-none content-header" style="margin-bottom:0">
+      <div class="panel-body" style="padding:0; padding-left:17px">
+        <div class="col-md-12">
+          <h3 class="animated fadeInLeft ng-binding">
+            <button onclick="window.location.href='#/word'; reload()" style="border:none; background:transparent"><i class="fa fa-hand-o-left" style="color:#F36E14; font-size:27px; margin-left:-12px; margin-right:7px"></i></button>            Wordbook detail
+          </h3>
+          <!-- ngRepeat: item in settings.settings -->
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 padding-0" style="padding:20px">
+      <div class="col-md-7 padding-0">
+        <div class="panel box-v3">
+          <ul id="tabs-demo4" class="nav nav-tabs nav-tabs-v3" role="tablist">
+            <li role="presentation" class="active">
+              <a aria-expanded="true">
+                <input type="text" ng-model="newwordbook.title" class="modal-content-right-text-mail" style="border:none; width:200%" placeholder="{{wordbook_detail.title}}">
+              </a>
+            </li>
+            <label style="float:right; padding-top:20px; color:#009688">
                                           {{wordbook_detail.numWords}}
                                         </label>
-                                    </ul>
-                                    <div id="tabsDemo4Content" class="tab-content tab-content-v3">
-                                      <div role="tabpanel" class="tab-pane fade active in" id="tabs-demo4-area1" aria-labelledby="tabs-demo4-area1" style="margin-bottom:13px">
-                                       
-                                           <a data-toggle="modal" data-target="#modal1" style="margin-bottom:10px; cursor:pointer">
-                                             <i class="fa fa-plus-circle fa-2x" aria-hidden="true" style="padding-right:5px"></i>
-                                             <span style="font-size:20px"> Add new word </span>
-                                           </a>                                                               
-                                             <center ng-hide="hide"> <h4> No word in wordbook</h4></center>
-                                             <center>
-                                               <div id="alert-danger" class="alert alert-danger" role="alert" ng-hide="!complete" style="background:#27C24C !important; margin-top: 30px;">
-                                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          </ul>
+          <div id="tabsDemo4Content" class="tab-content tab-content-v3">
+            <div role="tabpanel" class="tab-pane fade active in" id="tabs-demo4-area1" aria-labelledby="tabs-demo4-area1" style="margin-bottom:13px">
+
+              <a data-toggle="modal" data-target="#modal1" style="margin-bottom:10px; cursor:pointer">
+                <i class="fa fa-plus-circle fa-2x" aria-hidden="true" style="padding-right:5px"></i>
+                <span style="font-size:20px"> Add new word </span>
+              </a>
+              <center ng-hide="hide">
+                <h4> No word in wordbook</h4>
+              </center>
+              <center>
+                <div id="alert-danger" class="alert alert-danger" role="alert" ng-hide="!complete" style="background:#27C24C !important; margin-top: 30px;">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                   </button>
-                                                  <a class="alert-link" style="color:#fff">Your wordbook update complete !</a>
-                                                </div>
-                                             </center>
-                                              <table class="table table-hover top-20" ng-repeat="content in wordbook_detail.words track by $index">
-                                                <tbody>
-                                                <tr>
-                                                  <td style="width:85%">{{content}}</td>
-                                                  
-                                                  <td style="text-align:center; width:15%">
-                                                    <div class="btn-group" role="group">
-                                                     <a ng-click="worddelete($index)" style="cursor:pointer"> <i class="fa fa-times fa-2x" aria-hidden="true" style="color:red; padding-right:10px"></i> </a>
-                                                    <a ng-click="wordedit($index)" data-toggle="modal" data-target="#modal2"> <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true" style="color:#00838F; padding-left:10px"></i> </a>
-                                                    </div>
-                                                  </td>
-                                                </tr>
-                                              </tbody></table>
-                                              
-                                              <button class="btn ripple-infinite  btn-warning right top-20" ng-click="save(newwordbook)" ng-hide="complete">
+                  <a class="alert-link" style="color:#fff">Your wordbook update complete !</a>
+                </div>
+              </center>
+              <table class="table table-hover top-20" ng-repeat="content in wordbook_detail.words track by $index">
+                <tbody>
+                  <tr>
+                    <td style="width:85%">{{content}}</td>
+
+                    <td style="text-align:center; width:15%">
+                      <div class="btn-group" role="group">
+                        <a ng-click="worddelete($index)" style="cursor:pointer"> <i class="fa fa-times fa-2x" aria-hidden="true" style="color:red; padding-right:10px"></i> </a>
+                        <a ng-click="wordedit($index)" data-toggle="modal" data-target="#modal2" style="margin-left:-10px"> <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true" style="color:#00838F; padding-left:10px"></i>                          </a>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <button class="btn ripple-infinite  btn-warning right top-20" ng-click="save(newwordbook)" ng-hide="complete">
                                                 <div>
                                                   <span>Save</span>
                                                 </div>
-                                              </button>       
-                                                                                                                                             
-                                        <div class="modal fade" id="modal1" role="dialog">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                <div class="modal-header" style="background:#00838F; height:50px; text-align:center">
-                                                    <h4 style="color:#fff; margin-top: -1px; display: -webkit-inline-box;">Add word</h4>
-                                                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
-                                                </div>
-                                                <div class="modal-body">
-                                                    <input type="text" ng-model="word.words" class="modal-content-right-text-mail" style="border:none; margin-bottom:0; width:100%" placeholder="Word">
-                                                    <hr style="margin-top:0"/>
-                                                    <textarea rows="4" cols="78" placeholder="User definition" style="border:none"></textarea>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary" ng-click="wordsave(word)" style="background-color:#00838F" data-dismiss="modal">Save</button>
-                                                </div>
-                                                </div><!-- /.modal-content -->
-                                            </div><!-- /.modal-dialog -->
-                                            </div>
-                                        
-                                         <div class="modal fade" id="modal2" role="dialog">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                <div class="modal-header" style="background:#00838F; height:50px; text-align:center">
-                                                    <h4 style="color:#fff; margin-top: -1px; display: -webkit-inline-box;">Edit word</h4>
-                                                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
-                                                </div>
-                                                <div class="modal-body">
-                                                    <input type="text" ng-model="word.words" class="modal-content-right-text-mail" style="border:none; margin-bottom:0; width:100%" placeholder="Word">
-                                                    <hr style="margin-top:0"/>
-                                                    <textarea rows="4" cols="78" placeholder="User definition" style="border:none"></textarea>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary" ng-click="wordupdate(word)" style="background-color:#00838F" data-dismiss="modal">Save</button>
-                                                </div>
-                                                </div><!-- /.modal-content -->
-                                            </div><!-- /.modal-dialog -->
-                                            </div>
-                                                                         
-                                      </div>                                                              
+                                              </button>
+
+              <div class="modal fade" id="modal1" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header" style="background:#00838F; height:50px; text-align:center">
+                      <h4 style="color:#fff; margin-top: -1px; display: -webkit-inline-box;">Add word</h4>
+                      <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
+                    </div>
+                    <div class="modal-body">
+                      <input type="text" ng-model="word.words" class="modal-content-right-text-mail" style="border:none; margin-bottom:0; width:100%"
+                        placeholder="Word">
+                      <hr style="margin-top:0" />
+                      <textarea rows="4" cols="78" placeholder="User definition" style="border:none"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" ng-click="wordsave(word)" style="background-color:#00838F" data-dismiss="modal">Save</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+
+              <div class="modal fade" id="modal2" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header" style="background:#00838F; height:50px; text-align:center">
+                      <h4 style="color:#fff; margin-top: -1px; display: -webkit-inline-box;">Edit word</h4>
+                      <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>-->
+                    </div>
+                    <div class="modal-body">
+                      <input type="text" ng-model="word.words" class="modal-content-right-text-mail" style="border:none; margin-bottom:0; width:100%"
+                        placeholder="Word">
+                      <hr style="margin-top:0" />
+                      <textarea rows="4" cols="78" placeholder="User definition" style="border:none"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" ng-click="wordupdate(word)" style="background-color:#00838F" data-dismiss="modal">Save</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <!--Dictionary-->
+      <div class="col-md-5" ng-controller="MaterialdetailCtrl">
+        
+
+        <!--Dictionary-->
+<div class="panel box-v7" style="margin-top:0">
+    <div class="pull-right article-v1-time">
+        <div class="panel box-v1" style="margin-top:0px">
+
+
+            <div class="col-md-12 tabs-area box-shadow-none" style="margin-top:0">
+
+                <div class="search" style="background:#009688; margin-top:0px; margin-bottom:30px">
+                    <div class="input-group searchbox-v1">
+                        <span class="input-group-addon  border-none box-shadow-none" id="basic-addon1" style="background:#fff">
+                                                    <span class="fa fa-search" style="color:#EF8A2F"></span>
+                        </span>
+                        <!--<input list="bank" ng-model="word" type="text" class="txtsearch border-none box-shadow-none" placeholder="Dictionary Search"
+                                            aria-describedby="basic-addon1" style="border-radius:10px" ng-keydown="lookupm(word)" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()"
+                                            />-->
+                        <input list="bank" ng-model="words" type="text" class="txtsearch border-none box-shadow-none" placeholder="Dictionary Search"
+                            aria-describedby="basic-addon1" style="border-radius:10px" ng-change="lookupm(words)" ng-enter="search_click()"
+                        />
+
+                        <img ng-if="loadding" src="images/loading.gif" style="height:40px; margin-left:-42px; margin-top:-5px" />
+                        <!--<input type="button" id="btnSearch" value="Search" ng-click="search_click()" hidden/>-->
+                        <datalist id="bank" style="width:120%">
+                            <option ng-repeat="item in suggestions" ng-enter="search_click()" value="{{item}}"></option>
+                        </datalist>
+                    </div>
+                </div>
+
+                <div id="tabsDemo6Content" class="tab-content tab-content-v6 col-md-12" style="padding-top:0 !important; margin-top:-15px"
+                    ng-hide="hidedefi">
+
+                    <center ng-if="loadding">
+                        <img src="images/g-dots.gif">
+                    </center>
+
+                    <div ng-if="!loadding">
+                        <div role="tabpanel" class="tab-pane search-v1-menu1 fade active in" id="tabs-demo7-area1" aria-labelledby="tabs-demo7-area1">
+                            <div class="col-md-12 padding-0">
+                                <div class="media" style="height:auto">
+                                    <div class="media-body" ng-hide="nonword">
+                                        <audio hidden id="iaudio" ng-repeat="content in lookdictionary.pronid2Pron" ng-src="{{url(content.audioUri)}}" autoplay controls
+                                            preload="none">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                        <a class="media-heading" style="font-size:20px; margin-left:26px; text-transform: uppercase; font-weight:400" onclick="play()">{{lookdictionary.word}} <i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer; font-size:19px"></i></a><br/>
+                                        <!--<a class="media-heading" style="font-size:24px; margin-left:26px; text-transform: uppercase" ng-click="submitEntry()">{{lookdictionary.word}} <i class="fa fa-volume-up" aria-hidden="true" style="color:#F36E14; cursor:pointer"></i></a><br/>-->
+                                        <blockquote class="definitions">
+                                            <!--<p>{{lookdictionary.definitions}}</p>-->
+                                            <p ng-bind-html="lookdictionary.definitions.toString().replaceAll('pos','strong').replaceAll('def','li').replaceAll('0','').replaceAll(',','')"></p>
+                                        </blockquote><br/>
+                                        <div class="col-md-12" ng-show="lookdictionary.examples[0]">
+                                            <h3 style="font-size: 20px; text-transform: uppercase; font-weight: 400; margin-left:13px; margin-top:0">Examples</h3>
+                                            <dl ng-repeat="content in lookdictionary.examples" style="margin-bottom:7px; padding-bottom:7px; border-bottom: 1px dashed #d7edfc;">
+                                                <dt style="font-size:17px;">
+                                                    <a style="font-weight:400; color:#6EA9D0" ng-bind-html="content.sentence"></a>
+                                                </dt>
+                                                <dd style="font-size:15px; font-weight:300" ng-bind-html="content.translationText"></dd>
+                                            </dl>
+                                        </div>
                                     </div>
-                                  
-                                  
+                                    <div class="media-body" ng-hide="!nonword">
+                                        <a style="font-size:24px; margin-left:26px; text-transform: uppercase;" ng-hide="hover"> {{key}} </a>
+                                        <a style="font-size:24px; margin-left:26px; text-transform: uppercase;" ng-hide="!hover"> {{model.word}} </a>
+                                        <blockquote>
+                                            <p> not fount in dictionary!</p>
+                                        </blockquote><br/>
+                                    </div>
                                 </div>
-                            </div>
-                  <div class="col-md-12 card-wrap padding-0">
-                    
-                    <div class="col-md-12" hidden>
-                        <div class="panel bg-green text-white">
-                            <div class="panel-body">
-                              <div class="col-md-8 col-sm-8 col-xs-12">
-                                <div class="maps" style="height:300px;">
-                                </div>
-                              </div>
-                              <div class="col-md-4 col-sm-4 col-xs-12">
-                                  <canvas class="doughnut-chart hidden-xs"></canvas>
-                                  <div class="col-md-12">
-                                    <div class="col-md-6 col-sm-12 col-xs-12">
-                                      <h1>72.993</h1>
-                                      <p>People</p>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 col-xs-12">
-                                       <h1>12.000</h1>
-                                       <p>Active</p>
-                                    </div>
-                                  </div>
-                              </div>
                             </div>
                         </div>
                     </div>
-                    </div>
                 </div>
-      		  </div>
-          <!-- end: content -->
-          
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
       </div>
 
-      <!-- start: Mobile -->
-      <div id="mimin-mobile" class="reverse">
-        <div class="mimin-mobile-menu-list">
-            <div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
-                <ul class="nav nav-list">
-                   <li class="active ripple">
-                      <a class="tree-toggle nav-header"><span class="fa-home fa"></span> Home 
+      <div class="col-md-12 card-wrap padding-0">
+
+        <div class="col-md-12" hidden>
+          <div class="panel bg-green text-white">
+            <div class="panel-body">
+              <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="maps" style="height:300px;">
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <canvas class="doughnut-chart hidden-xs"></canvas>
+                <div class="col-md-12">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <h1>72.993</h1>
+                    <p>People</p>
+                  </div>
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <h1>12.000</h1>
+                    <p>Active</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end: content -->
+
+</div>
+
+<!-- start: Mobile -->
+<div id="mimin-mobile" class="reverse">
+  <div class="mimin-mobile-menu-list">
+    <div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
+      <ul class="nav nav-list">
+        <li class="active ripple">
+          <a class="tree-toggle nav-header"><span class="fa-home fa"></span> Home 
                         <!--<span class="fa-angle-right fa right-arrow text-right"></span>-->
                       </a>
-                      <!--<ul class="nav nav-list tree">
+          <!--<ul class="nav nav-list tree">
                           <li><a href="dashboard-v1.html">Dashboard v.1</a></li>
                           <li><a href="dashboard-v2.html">Dashboard v.2</a></li>
                       </ul>-->
-                    </li>
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa-wikipedia-w fa"></span> Words
-                        <!--<span class="fa-angle-right fa right-arrow text-right"></span>-->
-                      </a>
-                      <!--<ul class="nav nav-list tree">
+        </li>
+        <li class="ripple">
+          <a class="tree-toggle nav-header">
+            <span class="fa-wikipedia-w fa"></span> Words
+            <!--<span class="fa-angle-right fa right-arrow text-right"></span>-->
+          </a>
+          <!--<ul class="nav nav-list tree">
                         <li><a href="topnav.html">Top Navigation</a></li>
                         <li><a href="boxed.html">Boxed</a></li>
                       </ul>-->
-                    </li>
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa-book fa"></span> Materials
-                        <!--<span class="fa-angle-right fa right-arrow text-right"></span>-->
-                      </a>
-                      <!--<ul class="nav nav-list tree">
+        </li>
+        <li class="ripple">
+          <a class="tree-toggle nav-header">
+            <span class="fa-book fa"></span> Materials
+            <!--<span class="fa-angle-right fa right-arrow text-right"></span>-->
+          </a>
+          <!--<ul class="nav nav-list tree">
                         <li><a href="chartjs.html">ChartJs</a></li>
                         <li><a href="morris.html">Morris</a></li>
                         <li><a href="flot.html">Flot</a></li>
                         <li><a href="sparkline.html">SparkLine</a></li>
                       </ul>-->
-                    </li>
-                    <li class="ripple">
-                      <a class="tree-toggle nav-header">
-                        <span class="fa-bars fa"></span> Other
-                      </a>
-                    </li>
-                  </ul>
-            </div>
-        </div>       
-      </div>
-      
-      <button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
+        </li>
+        <li class="ripple">
+          <a class="tree-toggle nav-header">
+            <span class="fa-bars fa"></span> Other
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
         <span class="fa fa-bars"></span>
       </button>
-       <!-- end: Mobile -->
-       
-        <script>
+<!-- end: Mobile -->
+
+<script>
           function reload(){
             $("html, body").animate({
                 scrollTop: 0
