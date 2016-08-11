@@ -30,6 +30,38 @@ return str;
 var app  = angular.module('Lextend.controller', ['ngRoute', 'ngStorage', 'dataServices', 'ui.router', 'ngSanitize', 'bnx.module.facebook', 'directive.g+signin']);
 app
     
+    app.directive('fileModel', ['$parse', function ($parse) {
+    return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                var model = $parse(attrs.fileModel);
+                var modelSetter = model.assign;
+                
+                element.bind('change', function(){
+                    scope.$apply(function(){
+                        modelSetter(scope, element[0].files[0]);
+                    });
+                });
+            }
+        };
+    }])
+
+    app.service('fileUpload', ['$http', function ($http) {
+    this.uploadFileToUrl = function(file, uploadUrl){
+            var fd = new FormData();
+            fd.append('file', file);
+            $http.post(uploadUrl, fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            })
+            .success(function(){
+                console.log("OK");
+            })
+            .error(function(){
+                console.log("FALSE");
+            });
+        }
+    }])
 
     /**
      * Controls all other Pages
@@ -295,7 +327,7 @@ app
             };
         }
     })
-    .controller('CreateMaterialCtrl', function ($scope, $location, $http, apiService, $localStorage){
+    .controller('CreateMaterialCtrl', function ($scope, $location, $http, apiService, $localStorage, fileUpload){
              var auth_token = window.localStorage.getItem('auth_token');
         if (!auth_token) {
             window.location.href = '#/login';
@@ -330,6 +362,12 @@ app
                     }
                     console.log(response);
                 });
+            };
+
+            $scope.uploadFile = function(){
+                var file = $scope.myFile;
+                var uploadUrl = "upload/images";
+                fileUpload.uploadFileToUrl(file, uploadUrl);
             };
         }
     })
